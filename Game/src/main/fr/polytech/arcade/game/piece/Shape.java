@@ -1,6 +1,6 @@
-package main.fr.polytech.arcade.game;
+package main.fr.polytech.arcade.game.piece;
 
-import fr.berger.enhancedlist.Matrix;
+import fr.berger.enhancedlist.matrix.Matrix;
 
 public class Shape extends Matrix<Boolean> {
 	

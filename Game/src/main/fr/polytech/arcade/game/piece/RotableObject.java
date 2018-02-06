@@ -1,10 +1,14 @@
-package main.fr.polytech.arcade.game;
+package main.fr.polytech.arcade.game.piece;
 
-import java.awt.*;
+import fr.berger.enhancedlist.Point;
 
 public abstract class RotableObject implements Rotable {
 	
 	protected Point centre;
+	
+	public RotableObject() {
+		setCentre(new Point(0, 0));
+	}
 	
 	/* GETTER & SETTER */
 	
