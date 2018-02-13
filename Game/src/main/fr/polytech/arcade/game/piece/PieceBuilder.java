@@ -2,6 +2,7 @@ package main.fr.polytech.arcade.game.piece;
 
 import com.sun.istack.internal.NotNull;
 import fr.berger.enhancedlist.Point;
+import javafx.scene.paint.Color;
 
 public class PieceBuilder {
 	
@@ -76,6 +77,11 @@ public class PieceBuilder {
 	}
 	public PieceBuilder setCenter(int x, int y) {
 		piece.setCentre(new Point(x, y));
+		return this;
+	}
+	
+	public PieceBuilder setColor(@NotNull Color color) {
+		piece.setColor(color);
 		return this;
 	}
 	

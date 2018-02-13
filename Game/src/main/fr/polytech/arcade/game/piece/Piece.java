@@ -2,36 +2,49 @@ package main.fr.polytech.arcade.game.piece;
 
 import com.sun.istack.internal.NotNull;
 import fr.berger.enhancedlist.Point;
+import javafx.scene.paint.Color;
 import main.fr.polytech.arcade.game.grid.Grid;
 
 import java.util.Objects;
 
-public class Piece extends RotableObject implements Movable, Invertible {
+public class Piece extends RotableObject implements Invertible {
 	
 	private boolean isPlaced;
 	@NotNull
 	private Shape shape;
+	@NotNull
+	private Color color;
 	
 	/* CONSTRUCTORS */
 	
 	public Piece() {
 		setPlaced(false);
 		setShape(new Shape());
+		setColor(Color.BLACK);
 		updateCenter();
 	}
 	public Piece(boolean isPlaced) {
 		setPlaced(isPlaced);
 		setShape(new Shape());
+		setColor(Color.BLACK);
 		updateCenter();
 	}
 	public Piece(@NotNull Shape shape) {
 		setPlaced(false);
 		setShape(shape);
+		setColor(Color.BLACK);
 		updateCenter();
 	}
-	public Piece(boolean isPlaced, @NotNull Shape shape) {
+	public Piece(@NotNull Color color) {
+		setPlaced(false);
+		setShape(shape);
+		setColor(color);
+		updateCenter();
+	}
+	public Piece(boolean isPlaced, @NotNull Shape shape, @NotNull Color color) {
 		setPlaced(isPlaced);
 		setShape(shape);
+		setColor(color);
 		updateCenter();
 	}
 	
@@ -66,15 +79,21 @@ public class Piece extends RotableObject implements Movable, Invertible {
 		updateCenter();
 	}
 	
+	public @NotNull Color getColor() {
+		return color;
+	}
+	
+	public void setColor(@NotNull Color color) {
+		if (color == null)
+			throw new NullPointerException();
+		
+		this.color = color;
+	}
+	
 	/* OVERRIDES */
 	
 	@Override
 	public boolean rotate(Grid grid, Direction direction) {
-		return false;
-	}
-	
-	@Override
-	public boolean move(Grid grid, Point destination) {
 		return false;
 	}
 	
