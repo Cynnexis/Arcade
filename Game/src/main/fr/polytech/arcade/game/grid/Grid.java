@@ -95,21 +95,7 @@ public class Grid extends Matrix<Square> {
 		return addPiece(piece, new Point(x, y));
 	}
 	
-	public synchronized boolean move(@NotNull Piece piece, @NotNull Point dest) {
-		if (piece == null || dest == null)
-			throw new NullPointerException();
-		
-		if (!checkIfPieceCanBePlaced(piece, dest))
-			return false;
-		
-		int index = getIdFromPiece(piece);
-		
-		// TODO: Check 'dest' values, and test if piece.getPosition() + dest is out of bounds
-		
-		// If not such piece exist in the list, then we cannot move a piece which is not in the grid
-		if (index == -1)
-			return false;
-		
+	public @Nullable Point getPiecePosition(int index) {
 		// Search the first square which hold the piece
 		Square s = null;
 		
@@ -118,29 +104,22 @@ public class Grid extends Matrix<Square> {
 				if (get(i, j) != null && get(i, j).getIndexToPiece() == index)
 					s = get(i, j);
 		
-		// Now, free the squares
-		for (int i = s.getPosition().getX(); i < piece.getShape().getNbColumns() + s.getPosition().getX(); i++) {
-			for (int j = s.getPosition().getY(); j < piece.getShape().getNbRows() + s.getPosition().getY(); j++) {
-				if (piece.getShape().get(i - s.getPosition().getX(), j - s.getPosition().getY())) {
-					get(i, j).setType(SquareType.EMPTY);
-					get(i, j).setIndexToPiece(-1);
-				}
-			}
-		}
+		if (s != null)
+			return s.getPosition();
+		else
+			return null;
+	}
+	public @Nullable Point getPiecePosition(@Nullable Piece piece) {
+		if (piece == null)
+			throw new NullPointerException();
 		
-		// Finally, place the piece to the destination
-		for (int i = dest.getX(); i < piece.getShape().getNbColumns() + dest.getX(); i++) {
-			for (int j = dest.getY(); j < piece.getShape().getNbRows() + dest.getY(); j++) {
-				if (piece.getShape().get(i - dest.getX(), j - dest.getY())) {
-					get(i, j).setType(SquareType.HALF);
-					get(i, j).setIndexToPiece(index);
-				}
-			}
-		}
+		int index = getIdFromPiece(piece);
 		
-		get(dest.getX(), dest.getY()).setType(SquareType.HALF);
+		// If not such piece exist in the list, then we cannot move a piece which is not in the grid
+		if (index == -1)
+			return null;
 		
-		return true;
+		return getPiecePosition(index);
 	}
 	
 	public boolean checkIfPieceCanBePlaced(@NotNull Piece piece, @NotNull Point dest) {

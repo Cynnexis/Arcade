@@ -10,22 +10,26 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import main.fr.polytech.arcade.game.grid.Grid;
+import main.fr.polytech.arcade.game.grid.GridModel;
 import main.fr.polytech.arcade.game.grid.Square;
 import main.fr.polytech.arcade.game.piece.Piece;
 
-public class VisualGrid extends BorderPane {
+import java.util.Observable;
+import java.util.Observer;
+
+public class GridView extends BorderPane implements Observer {
 	
-	@Nullable
-	private Grid grid = null;
+	@NotNull
+	private GridModel grid = null;
 	
 	@NotNull
 	private GridPane gp_center = new GridPane();
 	
-	public VisualGrid() {
+	public GridView() {
 		super();
 		setGrid(null);
 	}
-	public VisualGrid(@Nullable Grid grid) {
+	public GridView(@Nullable Grid grid) {
 		super();
 		setGrid(grid);
 	}
@@ -65,10 +69,37 @@ public class VisualGrid extends BorderPane {
 	/* GETTERS & SETTERS */
 	
 	public @Nullable Grid getGrid() {
-		return grid;
+		if (this.grid == null)
+			this.grid = new GridModel();
+		
+		return this.grid.getGrid();
 	}
 	
 	public void setGrid(@Nullable Grid grid) {
-		this.grid = grid;
+		if (this.grid == null)
+			this.grid = new GridModel();
+		
+		this.grid.setGrid(grid);
+		
+		if (this.grid.getGrid() != null) {
+			this.grid.addObserver(this);
+		}
+	}
+	
+	/* OVERRIDE */
+	
+	/**
+	 * This method is called whenever the observed object is changed. An
+	 * application calls an <tt>Observable</tt> object's
+	 * <code>notifyObservers</code> method to have all the object's
+	 * observers notified of the change.
+	 *
+	 * @param o   the observable object.
+	 * @param arg an argument passed to the <code>notifyObservers</code>
+	 */
+	@Override
+	public void update(Observable o, Object arg) {
+		if (o instanceof GridModel && getGrid() != null)
+			update(getGrid());
 	}
 }

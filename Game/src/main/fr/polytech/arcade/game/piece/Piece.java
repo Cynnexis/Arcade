@@ -6,12 +6,15 @@ import javafx.scene.paint.Color;
 import main.fr.polytech.arcade.game.grid.Grid;
 
 import java.util.Objects;
+import java.util.Observable;
 
-public class Piece extends RotableObject implements Invertible {
+public class Piece extends Observable {
 	
 	private boolean isPlaced;
 	@NotNull
 	private Shape shape;
+	@NotNull
+	private Point centre;
 	@NotNull
 	private Color color;
 	
@@ -48,8 +51,15 @@ public class Piece extends RotableObject implements Invertible {
 		updateCenter();
 	}
 	
+	/**
+	 * Update the gravity center of the piece according to the shape. Notify the observers at the end
+	 * @return Return the new gravity center of the piece
+	 */
 	public Point updateCenter() {
 		setCentre(new Point(getShape().getNbColumns()/2, getShape().getNbRows()/2));
+		
+		setChanged();
+		notifyObservers();
 		
 		return getCentre();
 	}
@@ -62,6 +72,9 @@ public class Piece extends RotableObject implements Invertible {
 	
 	public void setPlaced(boolean placed) {
 		isPlaced = placed;
+		
+		setChanged();
+		notifyObservers();
 	}
 	
 	public @NotNull Shape getShape() {
@@ -79,6 +92,17 @@ public class Piece extends RotableObject implements Invertible {
 		updateCenter();
 	}
 	
+	public Point getCentre() {
+		return centre;
+	}
+	
+	public void setCentre(Point centre) {
+		this.centre = centre;
+		
+		setChanged();
+		notifyObservers();
+	}
+	
 	public @NotNull Color getColor() {
 		return color;
 	}
@@ -88,19 +112,12 @@ public class Piece extends RotableObject implements Invertible {
 			throw new NullPointerException();
 		
 		this.color = color;
+		
+		setChanged();
+		notifyObservers();
 	}
 	
 	/* OVERRIDES */
-	
-	@Override
-	public boolean rotate(Grid grid, Direction direction) {
-		return false;
-	}
-	
-	@Override
-	public void invert(Axis axis) {
-		// Invert piece
-	}
 	
 	@Override
 	public String toString() {
