@@ -1,8 +1,6 @@
 package main.fr.polytech.arcade.game.ui;
 
 import com.sun.corba.se.impl.orb.ParserTable;
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -13,6 +11,8 @@ import main.fr.polytech.arcade.game.grid.Grid;
 import main.fr.polytech.arcade.game.grid.GridModel;
 import main.fr.polytech.arcade.game.grid.Square;
 import main.fr.polytech.arcade.game.piece.Piece;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -42,9 +42,9 @@ public class GridView extends BorderPane implements Observer {
 		
 		gp_center.setGridLinesVisible(true);
 		
-		for (int i = 0; i < grid.getNbColumns(); i++) {
-			for (int j = 0; j < grid.getNbRows(); j++) {
-				Piece currentPiece = grid.getPiece(i, j);
+		for (int i = 0; i < grid.getWidth(); i++) {
+			for (int j = 0; j < grid.getHeight(); j++) {
+				Piece currentPiece = grid.get(i, j);
 				
 				Rectangle rect = new Rectangle(50, 50);
 				

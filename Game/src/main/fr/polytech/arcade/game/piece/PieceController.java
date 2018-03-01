@@ -1,8 +1,8 @@
 package main.fr.polytech.arcade.game.piece;
 
 import com.sun.corba.se.impl.encoding.CDROutputObject;
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import fr.berger.enhancedlist.Couple;
 import fr.berger.enhancedlist.Point;
 import main.fr.polytech.arcade.game.grid.Grid;

@@ -4,6 +4,7 @@ import com.sun.istack.internal.NotNull;
 import fr.berger.enhancedlist.Point;
 import main.fr.polytech.arcade.game.piece.Piece;
 
+@Deprecated
 public class Square {
 	
 	@NotNull
