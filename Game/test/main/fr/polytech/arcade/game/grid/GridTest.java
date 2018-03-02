@@ -12,8 +12,8 @@ class GridTest {
 	@BeforeEach
 	void setUp() {
 		grid = new Grid(10, 10);
-		grid.addPiece(new PieceBuilder()
-						.setIsPlaced(true)
+		grid.add(new PieceBuilder()
+						.setPosition(0, 0)
 						.setShape(new int[][]
 								{
 										{0, 0, 1},

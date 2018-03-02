@@ -9,13 +9,25 @@ public class PieceBuilder {
 	@NotNull
 	private Piece piece;
 	
+	public PieceBuilder(@NotNull Piece piece) {
+		if (piece != null)
+			this.piece = piece;
+	}
 	public PieceBuilder() {
-		piece = new Piece();
+		this(new Piece());
 	}
 	
 	public PieceBuilder setIsPlaced(boolean isPlaced) {
 		piece.setPlaced(isPlaced);
 		return this;
+	}
+	
+	public PieceBuilder setPosition(@NotNull Point position) {
+		piece.setPosition(position);
+		return this;
+	}
+	public PieceBuilder setPosition(int x, int y) {
+		return setPosition(new Point(x, y));
 	}
 	
 	public PieceBuilder setShape(@NotNull Shape shape) {
@@ -31,7 +43,7 @@ public class PieceBuilder {
 		if (shape.length <= 0)
 			throw new IllegalArgumentException();
 		
-		// Chekc if all rows have the same length
+		// Check if all rows have the same length
 		int dim = shape[0].length;
 		for (int i = 0; i < shape.length; i++)
 			if (shape[i].length != dim)

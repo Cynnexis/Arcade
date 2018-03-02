@@ -4,6 +4,8 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import main.fr.polytech.arcade.game.grid.GridController;
+import main.fr.polytech.arcade.game.piece.Piece;
 import main.fr.polytech.arcade.game.piece.PieceBuilder;
 import main.fr.polytech.arcade.game.ui.GridView;
 
@@ -26,30 +28,34 @@ public class Tetris extends Application {
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		TetrisEngine tengine = new TetrisEngine();
-		GridView vg = new GridView(tengine.getGrid());
+		GridController g_controller = new GridController();
 		
-		tengine.getGrid().addPiece(new PieceBuilder()
+		boolean r1 = g_controller.getGrid().add(new PieceBuilder()
+				.setPosition(0, 0)
 				.setShape(new int[][]
 						{
 								{1, 0},
 								{1, 1}
 						})
 				.setColor(Color.CYAN)
-				.createPiece(), 0, 0);
+				.createPiece());
 		
-		tengine.getGrid().addPiece(new PieceBuilder()
+		boolean r2 = g_controller.getGrid().add(new PieceBuilder()
+				.setPosition(1, 0)
 				.setShape(new int[][]
 						{
 								{1, 1},
 								{0, 1}
 						})
 				.setColor(Color.RED)
-				.createPiece(), 1, 0);
+				.createPiece());
 		
-		vg.update();
+		System.out.println("Tetris.start> r1 = " + r1 + " ; r2 = " + r2);
 		
-		Scene scene = new Scene(vg);
+		for (int i = 0; i < g_controller.getGrid().getPieces().size(); i++)
+			System.out.println("Tetris.start> piece n°" + i + ":\n" + g_controller.getGrid().getPieces().get(i).toString());
+		
+		Scene scene = new Scene(g_controller.getView());
 		
 		primaryStage.setTitle("Tetris");
 		primaryStage.setScene(scene);

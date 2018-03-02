@@ -4,6 +4,7 @@ import com.sun.istack.internal.Nullable;
 
 import java.util.Observable;
 
+@Deprecated
 public class GridModel extends Observable {
 	
 	@Nullable

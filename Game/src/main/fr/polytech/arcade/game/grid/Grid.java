@@ -64,10 +64,25 @@ public class Grid extends Observable {
 		if (piece.getShape() == null)
 			throw new NullPointerException();
 		
-		for (int i = destination.getX(); i < destination.getX() + piece.getShape().getNbColumns(); i++)
-			for (int j = destination.getY(); j < destination.getX() + piece.getShape().getNbRows(); j++)
-				if (get(i, j) != null)
-					return false;
+		for (int i = destination.getX(); i < destination.getX() + piece.getShape().getNbColumns(); i++) {
+			for (int j = destination.getY(); j < destination.getY() + piece.getShape().getNbRows(); j++) {
+				
+				Piece currentPiece = get(i, j);
+				if (currentPiece != null && !Objects.equals(currentPiece, piece)) {
+					Shape sh = currentPiece.getShape();
+					Point pos = currentPiece.getPosition();
+					
+					int x = i - pos.getX();
+					int y = j - pos.getY();
+					
+					if (sh != null &&
+							pos != null &&
+							sh.get(x, y) &&
+							piece.getShape().get(i - destination.getX(), j - destination.getY()))
+						return false;
+				}
+			}
+		}
 		
 		return true;
 	}
@@ -76,6 +91,56 @@ public class Grid extends Observable {
 			throw new NullPointerException();
 		
 		return checkIfPieceCanBePlaced(piece, piece.getPosition());
+	}
+	
+	private boolean move(@NotNull Piece piece) {
+		if (piece == null)
+			throw new NullPointerException();
+		
+		if (piece.getPosition() == null || piece.getShape() == null || piece.getCentre() == null || piece.getColor() == null)
+			throw new NullPointerException();
+		
+		// Check if the piece is already in the list
+		if (getIdFromPiece(piece) == -1)
+			return false;
+		
+		// Check if the position of the piece is in the grid
+		if (!checkIndexes(piece.getPosition()))
+			throw new ArrayIndexOutOfBoundsException();
+		
+		// Check if the dimension of the piece (position + shape) is not out of the grid
+		if (!checkIndexes(piece.getDimension()))
+			throw new ArrayIndexOutOfBoundsException();
+		
+		// Check if there is another piece already in the grid at the position of 'piece'
+		if (!checkIfPieceCanBePlaced(piece))
+			return false;
+		
+		// The piece can go there
+		return true;
+	}
+	public boolean move(@NotNull Piece piece, @NotNull Point destination) {
+		if (piece == null || destination == null)
+			throw new NullPointerException();
+		
+		// Check if the piece is already in the list
+		if (getIdFromPiece(piece) == -1)
+			return false;
+		
+		Point oldPos = piece.getPosition();
+		piece.setPosition(destination);
+		boolean result = move(piece);
+		
+		// If the piece cannot be moved, reset the piece position
+		if (!result)
+			piece.setPosition(oldPos);
+		
+		if (result) {
+			setChanged();
+			notifyObservers();
+		}
+		
+		return result;
 	}
 	
 	/* GETTER & SETTER */
@@ -98,8 +163,8 @@ public class Grid extends Observable {
 					int minX = pos.getX();
 					int minY = pos.getY();
 					
-					int maxX = minX + sh.getNbColumns();
-					int maxY = minY + sh.getNbRows();
+					int maxX = minX + sh.getNbColumns() - 1;
+					int maxY = minY + sh.getNbRows() - 1;
 					
 					if (minX <= point.getX() && point.getX() <= maxX &&
 						minY <= point.getY() && point.getY() <= maxY)
@@ -137,6 +202,9 @@ public class Grid extends Observable {
 		// Now, the piece can be placed
 		getPieces().add(piece);
 		
+		setChanged();
+		notifyObservers();
+		
 		return true;
 	}
 	public boolean add(@NotNull Piece piece, @NotNull Point destination) {
@@ -149,6 +217,9 @@ public class Grid extends Observable {
 		piece.setPosition(destination);
 		return add(piece);
 	}
+	public boolean add(@NotNull Piece piece, int x, int y) {
+		return add(piece, new Point(x, y));
+	}
 	
 	public ArrayList<Piece> getPieces() {
 		if (pieces == null)
@@ -159,6 +230,9 @@ public class Grid extends Observable {
 	
 	public void setPieces(ArrayList<Piece> pieces) {
 		this.pieces = pieces;
+		
+		setChanged();
+		notifyObservers();
 	}
 	
 	public @NotNull Point getDimension() {
@@ -181,6 +255,9 @@ public class Grid extends Observable {
 			throw new IllegalArgumentException("Dimension of the grid must be greater or equal to 0.");
 		
 		this.dimension = dimension;
+		
+		setChanged();
+		notifyObservers();
 	}
 	public Point setDimension(int width, int height) {
 		setDimension(new Point(width, height));

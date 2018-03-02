@@ -7,6 +7,7 @@ import main.fr.polytech.arcade.game.piece.Piece;
 
 import java.util.ArrayList;
 
+@Deprecated
 public abstract class Engine {
 	
 	@NotNull

@@ -34,7 +34,7 @@ public class Piece extends Observable {
 		updateCenter();
 	}
 	public Piece(@NotNull Point position, @NotNull Shape shape, @NotNull Color color) {
-		this(false, position, shape, color);
+		this(true, position, shape, color);
 	}
 	public Piece(@NotNull Point position, @NotNull Shape shape) {
 		this(position, shape, Color.BLACK);
@@ -44,6 +44,9 @@ public class Piece extends Observable {
 	}
 	public Piece(@NotNull Shape shape) {
 		this(new Point(0, 0), shape);
+	}
+	public Piece(@NotNull Piece copy) {
+		this(copy.isPlaced(), copy.getPosition(), copy.getShape(), copy.getCentre(), copy.getColor());
 	}
 	public Piece() {
 		this(new Shape());
@@ -151,16 +154,16 @@ public class Piece extends Observable {
 		
 		StringBuilder representation = new StringBuilder("");
 		
-		for (int i = 0; i < getShape().getNbColumns(); i++) {
-			for (int j = 0; j < getShape().getNbRows(); j++) {
-				if (getShape().get(i, j)) {
-					if (Objects.equals(getCentre(), new Point(i, j)))
+		for (int i = 0; i < getShape().getNbRows(); i++) {
+			for (int j = 0; j < getShape().getNbColumns(); j++) {
+				if (getShape().get(j, i)) {
+					if (Objects.equals(getCentre(), new Point(j, i)))
 						representation.append(centerSquare);
 					else
 						representation.append(c);
 				}
 				else {
-					if (Objects.equals(getCentre(), new Point(i, j)))
+					if (Objects.equals(getCentre(), new Point(j, i)))
 						representation.append(centerCircle);
 					else
 						representation.append(' ');
