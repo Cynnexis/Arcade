@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5f79d600-50d2-4253-af72-feb12c8f8b1f" name="Default" comment="">
+    <list default="true" id="5f79d600-50d2-4253-af72-feb12c8f8b1f" name="Default" comment="* Bug fixed about Grid.get: It now detects the most useful piece to return&#10;* Added GridController?update() (to force-update the view)&#10;* Added backgroundColor and lineColor attributes to GridView to create custom colors.&#10;* Bug fixed about GridView.update: It now print as a white tile any empty tiles (occupied by a piece or not)">
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/fr/polytech/arcade/game/ui/GridHandler.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/fr/polytech/arcade/game/grid/Grid.java" afterPath="$PROJECT_DIR$/src/main/fr/polytech/arcade/game/grid/Grid.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/fr/polytech/arcade/game/grid/GridController.java" afterPath="$PROJECT_DIR$/src/main/fr/polytech/arcade/game/grid/GridController.java" />
       <change beforePath="$PROJECT_DIR$/src/main/fr/polytech/arcade/game/ui/GridView.java" afterPath="$PROJECT_DIR$/src/main/fr/polytech/arcade/game/ui/GridView.java" />
       <change beforePath="$PROJECT_DIR$/test/test/tetris/Tetris.java" afterPath="$PROJECT_DIR$/test/test/tetris/Tetris.java" />
     </list>
@@ -108,7 +107,7 @@
       <file leaf-file-name="GridController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/fr/polytech/arcade/game/grid/GridController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
+            <state relative-caret-position="660">
               <caret line="73" column="20" lean-forward="false" selection-start-line="73" selection-start-column="20" selection-end-line="73" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -125,30 +124,44 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GridView.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GridView.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/fr/polytech/arcade/game/ui/GridView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="966">
-              <caret line="57" column="53" lean-forward="false" selection-start-line="57" selection-start-column="53" selection-end-line="57" selection-end-column="53" />
+            <state relative-caret-position="63">
+              <caret line="42" column="45" lean-forward="false" selection-start-line="42" selection-start-column="45" selection-end-line="42" selection-end-column="45" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1755#1756#0" expanded="true" />
-                <element signature="e#1784#1785#0" expanded="true" />
-                <element signature="e#2010#2011#0" expanded="true" />
-                <element signature="e#2033#2034#0" expanded="true" />
+                <element signature="e#2577#2578#0" expanded="true" />
+                <element signature="e#2606#2607#0" expanded="true" />
+                <element signature="e#2832#2833#0" expanded="true" />
+                <element signature="e#2855#2856#0" expanded="true" />
+                <element signature="e#3044#3045#0" expanded="true" />
+                <element signature="e#3068#3069#0" expanded="true" />
+                <element signature="e#3291#3292#0" expanded="true" />
+                <element signature="e#3318#3319#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Tetris.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GridHandler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/fr/polytech/arcade/game/ui/GridHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="42">
+              <caret line="2" column="30" lean-forward="true" selection-start-line="2" selection-start-column="30" selection-end-line="2" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Tetris.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/test/tetris/Tetris.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="84">
-              <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+            <state relative-caret-position="240">
+              <caret line="85" column="39" lean-forward="false" selection-start-line="85" selection-start-column="39" selection-end-line="85" selection-end-column="39" />
               <folding>
-                <element signature="e#2401#2402#0" expanded="true" />
-                <element signature="e#2420#2421#0" expanded="true" />
+                <element signature="e#2805#2806#0" expanded="true" />
+                <element signature="e#2824#2825#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -171,8 +184,8 @@
       <list>
         <option value="JUnit5 Test Class" />
         <option value="Enum" />
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -190,6 +203,11 @@
     </replaceStrings>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Cynner &lt;valentin.berger38@gmail.com&gt;" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="GradleLocalSettings">
@@ -229,6 +247,7 @@
         <option value="$PROJECT_DIR$/src/main/fr/polytech/arcade/game/piece/Piece.java" />
         <option value="$PROJECT_DIR$/src/main/fr/polytech/arcade/game/grid/Grid.java" />
         <option value="$PROJECT_DIR$/src/main/fr/polytech/arcade/game/grid/GridController.java" />
+        <option value="$PROJECT_DIR$/src/main/fr/polytech/arcade/game/ui/GridHandler.java" />
         <option value="$PROJECT_DIR$/test/test/tetris/Tetris.java" />
         <option value="$PROJECT_DIR$/src/main/fr/polytech/arcade/game/ui/GridView.java" />
       </list>
@@ -543,7 +562,7 @@
       <workItem from="1519933730677" duration="5100000" />
       <workItem from="1519982371283" duration="9547000" />
       <workItem from="1520011266427" duration="1512000" />
-      <workItem from="1520182266125" duration="2450000" />
+      <workItem from="1520182266125" duration="10003000" />
     </task>
     <task id="LOCAL-00001" summary="* Piece contains now its position (Point)&#10;* Grid is no longer a Matrix, but a collection of Piece. The methods 'get(x, y)' and 'add(piece)' change this level of abstraction to be easier to manipulate a grid ; however, it might be not compatible with the MVC model...&#10;* Added IntelliJ annotations, and changed all @/@Nullable to IntelliJ's&#10;* Shape has an untested method 'trim' to trim the dimension.&#10;* PieceController is bugged because it is not compatible with the new grid yet.&#10;* Square is now deprecated. It will be removed soon.">
       <created>1519939156095</created>
@@ -559,7 +578,14 @@
       <option name="project" value="LOCAL" />
       <updated>1519994468501</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="* Bug fixed about Grid.get: It now detects the most useful piece to return&#10;* Added GridController?update() (to force-update the view)&#10;* Added backgroundColor and lineColor attributes to GridView to create custom colors.&#10;* Bug fixed about GridView.update: It now print as a white tile any empty tiles (occupied by a piece or not)">
+      <created>1520184912512</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1520184912512</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -595,7 +621,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39657000" />
+    <option name="totallyTimeSpent" value="47210000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="-11" width="1922" height="1092" extended-state="6" />
@@ -609,7 +635,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32041883" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16078018" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16078018" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -634,7 +660,8 @@
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="* Piece contains now its position (Point)&#10;* Grid is no longer a Matrix, but a collection of Piece. The methods 'get(x, y)' and 'add(piece)' change this level of abstraction to be easier to manipulate a grid ; however, it might be not compatible with the MVC model...&#10;* Added IntelliJ annotations, and changed all @/@Nullable to IntelliJ's&#10;* Shape has an untested method 'trim' to trim the dimension.&#10;* PieceController is bugged because it is not compatible with the new grid yet.&#10;* Square is now deprecated. It will be removed soon." />
     <MESSAGE value="* Enhanced Grid.checkIfPieceCanBePlaced method&#10;* Added Grid.move (does it matches the MVC rules?)&#10;* Fixed Grid.get bug about getting the wrong piece because of an error in indexes computation&#10;* Grid is now an Observable element&#10;* Added GridController to control the model 'Grid' according to the MVC pattern&#10;* GridModel is now deprecated because a Grid is now an Observable element&#10;* The default value of 'isPlaced' in 'Piece' is now 'true'.&#10;* Added a new constructor by copy for Piece&#10;* Enhanced Piece.toString&#10;* Enhanced PieceBuilder&#10;* PieceController is now deprecated because Piece does not belong to the MVC model&#10;* Enhanced GridView for MVC" />
-    <option name="LAST_COMMIT_MESSAGE" value="* Enhanced Grid.checkIfPieceCanBePlaced method&#10;* Added Grid.move (does it matches the MVC rules?)&#10;* Fixed Grid.get bug about getting the wrong piece because of an error in indexes computation&#10;* Grid is now an Observable element&#10;* Added GridController to control the model 'Grid' according to the MVC pattern&#10;* GridModel is now deprecated because a Grid is now an Observable element&#10;* The default value of 'isPlaced' in 'Piece' is now 'true'.&#10;* Added a new constructor by copy for Piece&#10;* Enhanced Piece.toString&#10;* Enhanced PieceBuilder&#10;* PieceController is now deprecated because Piece does not belong to the MVC model&#10;* Enhanced GridView for MVC" />
+    <MESSAGE value="* Bug fixed about Grid.get: It now detects the most useful piece to return&#10;* Added GridController?update() (to force-update the view)&#10;* Added backgroundColor and lineColor attributes to GridView to create custom colors.&#10;* Bug fixed about GridView.update: It now print as a white tile any empty tiles (occupied by a piece or not)" />
+    <option name="LAST_COMMIT_MESSAGE" value="* Bug fixed about Grid.get: It now detects the most useful piece to return&#10;* Added GridController?update() (to force-update the view)&#10;* Added backgroundColor and lineColor attributes to GridView to create custom colors.&#10;* Bug fixed about GridView.update: It now print as a white tile any empty tiles (occupied by a piece or not)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -650,14 +677,14 @@
           <condition expression="i == 5 &amp;&amp; j == 4" language="JAVA" />
           <dependency master-id="0" />
           <url>file://$PROJECT_DIR$/src/main/fr/polytech/arcade/game/ui/GridView.java</url>
-          <line>40</line>
+          <line>65</line>
           <properties />
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <dependency id="0" />
           <url>file://$PROJECT_DIR$/test/test/tetris/Tetris.java</url>
-          <line>52</line>
+          <line>56</line>
           <properties />
           <option name="timeStamp" value="21" />
         </line-breakpoint>
@@ -763,19 +790,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/fr/polytech/arcade/game/piece/PieceBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1600">
-          <caret line="84" column="20" lean-forward="false" selection-start-line="84" selection-start-column="20" selection-end-line="84" selection-end-column="20" />
-          <folding>
-            <element signature="e#335#336#0" expanded="true" />
-            <element signature="e#359#360#0" expanded="true" />
-            <element signature="e#621#622#0" expanded="true" />
-            <element signature="e#663#664#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/fr/polytech/arcade/game/piece/Shape.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -855,10 +869,14 @@
           <caret line="45" column="16" lean-forward="false" selection-start-line="45" selection-start-column="16" selection-end-line="45" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1755#1756#0" expanded="true" />
-            <element signature="e#1784#1785#0" expanded="true" />
-            <element signature="e#2010#2011#0" expanded="true" />
-            <element signature="e#2033#2034#0" expanded="true" />
+            <element signature="e#2577#2578#0" expanded="true" />
+            <element signature="e#2606#2607#0" expanded="true" />
+            <element signature="e#2832#2833#0" expanded="true" />
+            <element signature="e#2855#2856#0" expanded="true" />
+            <element signature="e#3044#3045#0" expanded="true" />
+            <element signature="e#3068#3069#0" expanded="true" />
+            <element signature="e#3291#3292#0" expanded="true" />
+            <element signature="e#3318#3319#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -868,8 +886,8 @@
         <state relative-caret-position="738">
           <caret line="47" column="36" lean-forward="true" selection-start-line="47" selection-start-column="36" selection-end-line="47" selection-end-column="36" />
           <folding>
-            <element signature="e#2401#2402#0" expanded="true" />
-            <element signature="e#2420#2421#0" expanded="true" />
+            <element signature="e#2805#2806#0" expanded="true" />
+            <element signature="e#2824#2825#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1218,6 +1236,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/fr/polytech/arcade/game/piece/PieceController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="7" column="46" lean-forward="true" selection-start-line="7" selection-start-column="46" selection-end-line="7" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/main/fr/polytech/arcade/game/grid/GridTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="21" column="38" lean-forward="true" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/fr/polytech/arcade/game/grid/Grid.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -1248,17 +1282,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/fr/polytech/arcade/game/piece/PieceController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="7" column="46" lean-forward="true" selection-start-line="7" selection-start-column="46" selection-end-line="7" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/fr/polytech/arcade/game/grid/GridController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
+        <state relative-caret-position="660">
           <caret line="73" column="20" lean-forward="false" selection-start-line="73" selection-start-column="20" selection-end-line="73" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1274,35 +1300,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/fr/polytech/arcade/game/ui/GridView.java">
+    <entry file="file://$PROJECT_DIR$/test/test/tetris/Tetris.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="966">
-          <caret line="57" column="53" lean-forward="false" selection-start-line="57" selection-start-column="53" selection-end-line="57" selection-end-column="53" />
+        <state relative-caret-position="240">
+          <caret line="85" column="39" lean-forward="false" selection-start-line="85" selection-start-column="39" selection-end-line="85" selection-end-column="39" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1755#1756#0" expanded="true" />
-            <element signature="e#1784#1785#0" expanded="true" />
-            <element signature="e#2010#2011#0" expanded="true" />
-            <element signature="e#2033#2034#0" expanded="true" />
+            <element signature="e#2805#2806#0" expanded="true" />
+            <element signature="e#2824#2825#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/main/fr/polytech/arcade/game/grid/GridTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/fr/polytech/arcade/game/ui/GridHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="21" column="38" lean-forward="true" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
+        <state relative-caret-position="42">
+          <caret line="2" column="30" lean-forward="true" selection-start-line="2" selection-start-column="30" selection-end-line="2" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/test/tetris/Tetris.java">
+    <entry file="file://$PROJECT_DIR$/src/main/fr/polytech/arcade/game/ui/GridView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+        <state relative-caret-position="63">
+          <caret line="42" column="45" lean-forward="false" selection-start-line="42" selection-start-column="45" selection-end-line="42" selection-end-column="45" />
           <folding>
-            <element signature="e#2401#2402#0" expanded="true" />
-            <element signature="e#2420#2421#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#2577#2578#0" expanded="true" />
+            <element signature="e#2606#2607#0" expanded="true" />
+            <element signature="e#2832#2833#0" expanded="true" />
+            <element signature="e#2855#2856#0" expanded="true" />
+            <element signature="e#3044#3045#0" expanded="true" />
+            <element signature="e#3068#3069#0" expanded="true" />
+            <element signature="e#3291#3292#0" expanded="true" />
+            <element signature="e#3318#3319#0" expanded="true" />
           </folding>
         </state>
       </provider>

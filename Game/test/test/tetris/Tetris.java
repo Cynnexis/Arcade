@@ -1,8 +1,12 @@
 package test.tetris;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import main.fr.polytech.arcade.game.grid.GridController;
 import main.fr.polytech.arcade.game.piece.Piece;
@@ -61,6 +65,12 @@ public class Tetris extends Application {
 				.setCenter(1, 1)
 				.createPiece());
 		
+		g_controller.getView().setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				//
+			}
+		});
 		g_controller.update();
 		
 		System.out.println("Tetris.start> r1 = " + r1 + " ; r2 = " + r2 + " ; r3 = " + r3);
@@ -68,7 +78,12 @@ public class Tetris extends Application {
 		for (int i = 0; i < g_controller.getGrid().getPieces().size(); i++)
 			System.out.println("Tetris.start> piece n°" + i + ":\n" + g_controller.getGrid().getPieces().get(i).toString());
 		
-		Scene scene = new Scene(g_controller.getView());
+		BorderPane bp_main = new BorderPane();
+		
+		bp_main.setCenter(g_controller.getView());
+		bp_main.setTop(new Text("Test"));
+		
+		Scene scene = new Scene(bp_main);
 		
 		primaryStage.setTitle("Tetris");
 		primaryStage.setScene(scene);
