@@ -17,8 +17,15 @@ import java.util.Observer;
 
 public class GridView extends BorderPane {
 	
+	@NotNull
+	private Color backgroundColor;
+	@NotNull
+	private Color lineColor;
+	
 	public GridView() {
 		super();
+		setBackgroundColor(Color.WHITE);
+		setLineColor(Color.GRAY);
 	}
 	
 	public void update(@NotNull Grid grid) {
@@ -33,19 +40,9 @@ public class GridView extends BorderPane {
 			for (int j = 0; j < grid.getHeight(); j++) {
 				Piece currentPiece = grid.get(i, j);
 				
-				/* TODO: Resolve this bug: When two pieces are overlaid (with one at 'false' and the other at 'true'
-				 *for their shape), the first of the list is given.
-				 * Solution: change Grid.get() method to do the following:
-				 * -> Get the first piece which meet the conditions. However, if the piece is false for the condition,
-				 * continue to parse the list.
-				 * -> If another piece meets the conditions AND is true for them, take this one in priority, and stop
-				 * the loop.
-				 * -> Return the default piece or the top priority piece if it exists
-				*/
-				
 				Rectangle rect = new Rectangle(50, 50);
 				
-				rect.setStroke(Color.GRAY);
+				rect.setStroke(getLineColor());
 				
 				if (currentPiece != null) {
 					int x = i - currentPiece.getPosition().getX();
@@ -54,14 +51,40 @@ public class GridView extends BorderPane {
 					if (currentPiece.getShape() != null && currentPiece.getPosition() != null &&
 							currentPiece.getShape().get(x, y))
 						rect.setFill(currentPiece.getColor());
+					else
+						rect.setFill(getBackgroundColor());
 				}
 				else
-					rect.setFill(Color.WHITE);
+					rect.setFill(getBackgroundColor());
 				
 				gp_center.add(rect, i, j);
 			}
 		}
 		
 		this.setCenter(gp_center);
+	}
+	
+	/* GETTERS & SETTERS */
+	
+	public @NotNull Color getBackgroundColor() {
+		return backgroundColor;
+	}
+	
+	public void setBackgroundColor(@NotNull Color backgroundColor) {
+		if (backgroundColor == null)
+			throw new NullPointerException();
+		
+		this.backgroundColor = backgroundColor;
+	}
+	
+	public @NotNull Color getLineColor() {
+		return lineColor;
+	}
+	
+	public void setLineColor(@NotNull Color lineColor) {
+		if (lineColor == null)
+			throw new NullPointerException();
+		
+		this.lineColor = lineColor;
 	}
 }

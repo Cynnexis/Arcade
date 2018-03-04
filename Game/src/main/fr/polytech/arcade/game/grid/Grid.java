@@ -145,6 +145,13 @@ public class Grid extends Observable {
 	
 	/* GETTER & SETTER */
 	
+	/**
+	 * Get the piece at the coordinate <c>point</c>. If there is more than one piece at this coordinates (for example,
+	 * there is one piece which is not exactly on this tile, but its dimension uses it, and a second uses entirely),
+	 * then the piece which uses the most the tile at <c>point</c> will be returned.
+	 * @param point The coordinates of the tile
+	 * @return Return the piece at <c>point</c>. If there is no tile, return <c>null</c>.
+	 */
 	public @Nullable Piece get(@NotNull Point point) {
 		if (point == null)
 			throw new NullPointerException();
@@ -152,7 +159,10 @@ public class Grid extends Observable {
 		if (!checkIndexes(point))
 			throw new ArrayIndexOutOfBoundsException();
 		
-		for (int i = 0; i < pieces.size(); i++) {
+		Piece value = null;
+		boolean notPlaced = false;
+		
+		for (int i = 0; i < pieces.size() && (value == null || notPlaced); i++) {
 			Piece currentPiece = pieces.get(i);
 			
 			if (currentPiece != null) {
@@ -167,13 +177,15 @@ public class Grid extends Observable {
 					int maxY = minY + sh.getNbRows() - 1;
 					
 					if (minX <= point.getX() && point.getX() <= maxX &&
-						minY <= point.getY() && point.getY() <= maxY)
-						return currentPiece;
+						minY <= point.getY() && point.getY() <= maxY) {
+						value = currentPiece;
+						notPlaced = !sh.get(Math.abs(minX - point.getX()), Math.abs(minY - point.getY()));
+					}
 				}
 			}
 		}
 		
-		return null;
+		return value;
 	}
 	public @Nullable Piece get(int x, int y) {
 		return get(new Point(x, y));

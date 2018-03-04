@@ -50,7 +50,20 @@ public class Tetris extends Application {
 				.setColor(Color.RED)
 				.createPiece());
 		
-		System.out.println("Tetris.start> r1 = " + r1 + " ; r2 = " + r2);
+		boolean r3 = g_controller.getGrid().add(new PieceBuilder()
+				.setPosition(4, 4)
+				.setShape(new int[][]
+						{
+								{1, 0, 1},
+								{1, 1, 1}
+						})
+				.setColor(Color.GREEN)
+				.setCenter(1, 1)
+				.createPiece());
+		
+		g_controller.update();
+		
+		System.out.println("Tetris.start> r1 = " + r1 + " ; r2 = " + r2 + " ; r3 = " + r3);
 		
 		for (int i = 0; i < g_controller.getGrid().getPieces().size(); i++)
 			System.out.println("Tetris.start> piece n°" + i + ":\n" + g_controller.getGrid().getPieces().get(i).toString());

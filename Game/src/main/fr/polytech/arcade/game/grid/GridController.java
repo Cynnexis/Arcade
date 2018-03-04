@@ -69,8 +69,13 @@ public class GridController implements Observer {
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		if (o != null && o instanceof Grid && getGrid() != null && getView() != null) {
-			getView().update(getGrid());
+		if (o != null && o instanceof Grid && getView() != null) {
+			setGrid((Grid) o);
+			update();
 		}
+	}
+	public void update() {
+		if (getGrid() != null && getView() != null)
+			getView().update(getGrid());
 	}
 }
