@@ -9,8 +9,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import main.fr.polytech.arcade.game.grid.GridController;
+import main.fr.polytech.arcade.game.piece.Axis;
+import main.fr.polytech.arcade.game.piece.Direction;
 import main.fr.polytech.arcade.game.piece.Piece;
 import main.fr.polytech.arcade.game.piece.PieceBuilder;
+import main.fr.polytech.arcade.game.ui.GridHandler;
 import main.fr.polytech.arcade.game.ui.GridView;
 
 public class Tetris extends Application {
@@ -58,17 +61,24 @@ public class Tetris extends Application {
 				.setPosition(4, 4)
 				.setShape(new int[][]
 						{
-								{1, 0, 1},
-								{1, 1, 1}
+								{1, 0, 1, 1},
+								{1, 1, 1, 0}
 						})
 				.setColor(Color.GREEN)
 				.setCenter(1, 1)
 				.createPiece());
 		
-		g_controller.getView().setOnMouseClicked(new EventHandler<MouseEvent>() {
+		g_controller.addGridHandler(new GridHandler() {
 			@Override
-			public void handle(MouseEvent event) {
-				//
+			public void onTileClicked(int x, int y) {
+				System.out.println("Tetris.onTileClicked> (" + x + " ; " + y + ")");
+				
+				Piece p = g_controller.getGrid().get(4, 4);
+				
+				if (p != null) {
+					p.rotate(Direction.WEST);
+					p.setColor(Color.PURPLE);
+				}
 			}
 		});
 		g_controller.update();

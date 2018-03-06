@@ -2,6 +2,7 @@ package main.fr.polytech.arcade.game.grid;
 
 import fr.berger.enhancedlist.Point;
 import fr.berger.enhancedlist.matrix.Matrix;
+import main.fr.polytech.arcade.game.AbstractModel;
 import main.fr.polytech.arcade.game.piece.Piece;
 import main.fr.polytech.arcade.game.piece.Shape;
 import org.jetbrains.annotations.NotNull;
@@ -10,8 +11,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Observable;
+import java.util.Observer;
 
-public class Grid extends Observable {
+public class Grid extends AbstractModel implements Observer {
 	
 	@NotNull
 	private ArrayList<Piece> pieces;
@@ -30,6 +32,17 @@ public class Grid extends Observable {
 		this(10, 10);
 	}
 	
+	public boolean checkIndexes(@NotNull Point indexes) {
+		if (indexes == null)
+			throw new NullPointerException();
+		
+		return (indexes.getX() >= 0 && indexes.getX() < getWidth()) &&
+				(indexes.getY() >= 0 && indexes.getY() < getHeight());
+	}
+	public boolean checkIndexes(int x, int y) {
+		return checkIndexes(new Point(x, y));
+	}
+	
 	/**
 	 * Search the piece in the list {@code pieces}. When it is found, return the index to this piece
 	 * @param piece The instance of piece to search, different from {@code null}
@@ -44,17 +57,6 @@ public class Grid extends Observable {
 				return i;
 		
 		return -1;
-	}
-	
-	public boolean checkIndexes(@NotNull Point indexes) {
-		if (indexes == null)
-			throw new NullPointerException();
-		
-		return (indexes.getX() >= 0 && indexes.getX() < getWidth()) &&
-				(indexes.getY() >= 0 && indexes.getY() < getHeight());
-	}
-	public boolean checkIndexes(int x, int y) {
-		return checkIndexes(new Point(x, y));
 	}
 	
 	public boolean checkIfPieceCanBePlaced(@NotNull Piece piece, @NotNull Point destination) {
@@ -135,15 +137,11 @@ public class Grid extends Observable {
 		if (!result)
 			piece.setPosition(oldPos);
 		
-		if (result) {
-			setChanged();
-			notifyObservers();
-		}
+		if (result)
+			update();
 		
 		return result;
 	}
-	
-	/* GETTER & SETTER */
 	
 	/**
 	 * Get the piece at the coordinate <c>point</c>. If there is more than one piece at this coordinates (for example,
@@ -162,8 +160,8 @@ public class Grid extends Observable {
 		Piece value = null;
 		boolean notPlaced = false;
 		
-		for (int i = 0; i < pieces.size() && (value == null || notPlaced); i++) {
-			Piece currentPiece = pieces.get(i);
+		for (int i = 0; i < getPieces().size() && (value == null || notPlaced); i++) {
+			Piece currentPiece = getPieces().get(i);
 			
 			if (currentPiece != null) {
 				Point pos = currentPiece.getPosition();
@@ -177,9 +175,13 @@ public class Grid extends Observable {
 					int maxY = minY + sh.getNbRows() - 1;
 					
 					if (minX <= point.getX() && point.getX() <= maxX &&
-						minY <= point.getY() && point.getY() <= maxY) {
+							minY <= point.getY() && point.getY() <= maxY) {
 						value = currentPiece;
-						notPlaced = !sh.get(Math.abs(minX - point.getX()), Math.abs(minY - point.getY()));
+						try {
+							notPlaced = !sh.get(Math.abs(minX - point.getX()), Math.abs(minY - point.getY()));
+						} catch (IndexOutOfBoundsException ignored) {
+							notPlaced = false;
+						}
 					}
 				}
 			}
@@ -212,10 +214,9 @@ public class Grid extends Observable {
 			return false;
 		
 		// Now, the piece can be placed
-		getPieces().add(piece);
+		addPiece(piece);
 		
-		setChanged();
-		notifyObservers();
+		update();
 		
 		return true;
 	}
@@ -233,18 +234,30 @@ public class Grid extends Observable {
 		return add(piece, new Point(x, y));
 	}
 	
-	public ArrayList<Piece> getPieces() {
+	/* GETTER & SETTER */
+	
+	public @NotNull ArrayList<Piece> getPieces() {
 		if (pieces == null)
-			pieces = new ArrayList<>(0);
+			pieces = new ArrayList<>();
 		
 		return pieces;
 	}
 	
-	public void setPieces(ArrayList<Piece> pieces) {
+	protected void setPieces(@NotNull ArrayList<Piece> pieces) {
+		if (pieces == null)
+			throw new NullPointerException();
+		
 		this.pieces = pieces;
 		
-		setChanged();
-		notifyObservers();
+		update();
+	}
+	
+	protected void addPiece(@NotNull Piece piece) {
+		if (piece == null)
+			throw new NullPointerException();
+		
+		piece.addObserver(this);
+		getPieces().add(piece);
 	}
 	
 	public @NotNull Point getDimension() {
@@ -268,8 +281,7 @@ public class Grid extends Observable {
 		
 		this.dimension = dimension;
 		
-		setChanged();
-		notifyObservers();
+		update();
 	}
 	public Point setDimension(int width, int height) {
 		setDimension(new Point(width, height));
@@ -292,5 +304,12 @@ public class Grid extends Observable {
 		return "Grid{" +
 				"pieces=" + pieces +
 				'}';
+	}
+	
+	// If one piece notify the Grid, then Grid notify its controller which will notify its view (#Notifyception)
+	@Override
+	public void update(Observable observable, Object o) {
+		if (observable != null && observable instanceof Piece)
+			update();
 	}
 }

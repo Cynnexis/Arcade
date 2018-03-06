@@ -1,12 +1,21 @@
 package main.fr.polytech.arcade.game.grid;
 
+import fr.berger.enhancedlist.Point;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
+import main.fr.polytech.arcade.game.piece.Piece;
+import main.fr.polytech.arcade.game.piece.Shape;
+import main.fr.polytech.arcade.game.ui.GridHandler;
 import main.fr.polytech.arcade.game.ui.GridView;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Observable;
 import java.util.Observer;
 
+@SuppressWarnings("NullableProblems")
 public class GridController implements Observer {
 	
 	@NotNull
@@ -14,9 +23,28 @@ public class GridController implements Observer {
 	@NotNull
 	private GridView view;
 	
+	@NotNull
+	private ArrayList<GridHandler> gridHandlers;
+	
 	public GridController(@NotNull Grid grid, @NotNull GridView view) {
 		setGrid(grid);
 		setView(view);
+		setGridHandlers(new ArrayList<>());
+		
+		getView().addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				getView().requestFocus();
+				
+				int x = (int) Math.floor(event.getX() / (getView().getTileDimension() + getView().getLineStroke()));
+				int y = (int) Math.floor(event.getY() / (getView().getTileDimension() + getView().getLineStroke()));
+				
+				//System.out.println("[" + x + " ; " + y + "]");
+				
+				for (GridHandler gh : getGridHandlers())
+					gh.onTileClicked(x, y);
+			}
+		});
 	}
 	public GridController(@NotNull Grid grid) {
 		this(grid, new GridView());
@@ -24,10 +52,6 @@ public class GridController implements Observer {
 	public GridController() {
 		this(new Grid());
 	}
-	
-	/* CONTROL */
-	
-	
 	
 	/* GETTERS & SETTERS */
 	
@@ -54,6 +78,27 @@ public class GridController implements Observer {
 			throw new NullPointerException();
 		
 		this.view = view;
+	}
+	
+	public @NotNull ArrayList<GridHandler> getGridHandlers() {
+		if (gridHandlers == null)
+			gridHandlers = new ArrayList<>();
+		
+		return gridHandlers;
+	}
+	
+	public void setGridHandlers(@NotNull ArrayList<GridHandler> gridHandlers) {
+		if (gridHandlers == null)
+			throw new NullPointerException();
+		
+		this.gridHandlers = gridHandlers;
+	}
+	
+	public void addGridHandler(@NotNull GridHandler gridHandler) {
+		if (gridHandler == null)
+			throw new NullPointerException();
+		
+		getGridHandlers().add(gridHandler);
 	}
 	
 	/* OVERRIDES */

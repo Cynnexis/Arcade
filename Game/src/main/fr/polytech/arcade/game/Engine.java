@@ -7,39 +7,45 @@ import main.fr.polytech.arcade.game.piece.Piece;
 
 import java.util.ArrayList;
 
-@Deprecated
-public abstract class Engine {
-	
-	@NotNull
-	protected Grid grid;
+@SuppressWarnings("NullableProblems")
+public class Engine {
 	
 	@Nullable
 	protected Piece currentPiece;
 	
 	@NotNull
+	private GameState state;
+	
+	@NotNull
 	private EngineListener engineListener;
 	
+	@NotNull
+	private long gameStart;
+	@NotNull
+	private Thread gameThread;
+	
 	public Engine() {
-		setGrid(new Grid());
 		setCurrentPiece(null);
+		setState(GameState.INITIALIZING);
 		setEngineListener(new EngineListener() {
 			@Override
 			public void onCurrentPieceChanged(Piece newCurrentPiece) { }
+			@Override
+			public void tick(long time) { }
 		});
+		
+		setGameStart(System.currentTimeMillis());
+		setGameThread(new Thread(new Runnable() {
+			@Override
+			public void run() {
+				while (GameState.isGameContinuing(getState())) {
+					getEngineListener().tick(System.currentTimeMillis() - getGameStart());
+				}
+			}
+		}));
 	}
 	
 	/* GETTERS & SETTERS */
-	
-	public @NotNull Grid getGrid() {
-		return grid;
-	}
-	
-	public void setGrid(@NotNull Grid grid) {
-		if (grid == null)
-			throw new NullPointerException();
-		
-		this.grid = grid;
-	}
 	
 	public @NotNull Piece getCurrentPiece() {
 		return currentPiece;
@@ -55,11 +61,30 @@ public abstract class Engine {
 		}
 	}
 	
+	public @NotNull GameState getState() {
+		if (state == null)
+			state = GameState.INITIALIZING;
+		
+		return state;
+	}
+	
+	public void setState(@NotNull GameState state) {
+		if (state == null)
+			throw new NullPointerException();
+		
+		this.state = state;
+		
+		if (GameState.isGameContinuing(this.state))
+			getGameThread().start();
+	}
+	
 	public @NotNull EngineListener getEngineListener() {
 		if (engineListener == null)
 			engineListener = new EngineListener() {
 				@Override
-				public void onCurrentPieceChanged(Piece newCurrentPiece) {}
+				public void onCurrentPieceChanged(Piece newCurrentPiece) { }
+				@Override
+				public void tick(long time) { }
 			};
 		
 		return engineListener;
@@ -70,5 +95,27 @@ public abstract class Engine {
 			throw new NullPointerException();
 		
 		this.engineListener = engineListener;
+	}
+	
+	protected long getGameStart() {
+		return gameStart;
+	}
+	
+	private void setGameStart(long gameStart) {
+		if (gameStart < 0)
+			throw new IllegalArgumentException();
+		
+		this.gameStart = gameStart;
+	}
+	
+	protected @NotNull Thread getGameThread() {
+		return gameThread;
+	}
+	
+	protected void setGameThread(@NotNull Thread gameThread) {
+		if (gameThread == null)
+			throw new NullPointerException();
+		
+		this.gameThread = gameThread;
 	}
 }

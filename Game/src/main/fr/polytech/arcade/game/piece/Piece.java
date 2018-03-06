@@ -1,14 +1,15 @@
 package main.fr.polytech.arcade.game.piece;
 
-import com.sun.istack.internal.NotNull;
 import fr.berger.enhancedlist.Point;
 import javafx.scene.paint.Color;
+import main.fr.polytech.arcade.game.AbstractModel;
 import main.fr.polytech.arcade.game.grid.Grid;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 import java.util.Observable;
 
-public class Piece extends Observable {
+public class Piece extends AbstractModel {
 	
 	private boolean isPlaced;
 	@NotNull
@@ -52,6 +53,84 @@ public class Piece extends Observable {
 		this(new Shape());
 	}
 	
+	public @NotNull Piece rotate(@NotNull Direction direction) {
+		Shape rotated = new Shape(getShape().getNbColumns(), getShape().getNbRows());
+		
+		switch (direction)
+		{
+			case NORTH:
+				break;
+			case EAST:
+				transpose();
+				reverseColumns();
+				break;
+			case SOUTH:
+				invert(Axis.HORIZONTAL);
+				invert(Axis.VERTICAL);
+				break;
+			case WEST:
+				transpose();
+				reverseColumns();
+				break;
+		}
+		
+		//setShape(rotated);
+		return this;
+	}
+	
+	public @NotNull Piece invert(@NotNull Axis axis) {
+		Shape inverted = new Shape(getShape().getNbColumns(), getShape().getNbRows());
+		
+		for (int i = 0; i < getShape().getNbColumns(); i++) {
+			for (int j = 0; j < getShape().getNbRows(); j++) {
+				if (axis == Axis.HORIZONTAL)
+					inverted.set(getShape().getNbColumns() - i - 1, j, getShape().get(i, j));
+				else
+					inverted.set(i, getShape().getNbRows() - j - 1, getShape().get(i, j));
+			}
+		}
+		
+		setShape(inverted);
+		return this;
+	}
+	
+	public @NotNull Piece transpose() {
+		Shape transposed = new Shape(getShape().getNbRows(), getShape().getNbColumns());
+		
+		for (int i = 0; i < getShape().getNbColumns(); i++) {
+			for (int j = 0; j < getShape().getNbRows(); j++) {
+				try {
+					transposed.set(j, i, getShape().get(i, j));
+				} catch (IndexOutOfBoundsException ignored) { }
+				
+				try {
+					transposed.set(i, j, getShape().get(j, i));
+				} catch (IndexOutOfBoundsException ignored) { }
+			}
+		}
+		
+		setShape(transposed);
+		return this;
+	}
+	
+	public @NotNull Piece reverseColumns() {
+		Shape reversed = new Shape(getShape().getNbColumns(), getShape().getNbRows());
+		
+		for (int i = 0; i < getShape().getNbColumns(); i++) {
+			for (int j = 0, k = getShape().getNbRows() - 1; j < k; j++, k--) {
+				try {
+					reversed.set(j, i, getShape().get(k, i));
+				} catch (IndexOutOfBoundsException ignored) { }
+				try {
+					reversed.set(k, i, getShape().get(j, i));
+				} catch (IndexOutOfBoundsException ignored) { }
+			}
+		}
+		
+		setShape(reversed);
+		return this;
+	}
+	
 	/**
 	 * Update the gravity center of the piece according to the shape. Notify the observers at the end
 	 * @return Return the new gravity center of the piece
@@ -59,8 +138,7 @@ public class Piece extends Observable {
 	public Point updateCenter() {
 		setCentre(new Point(getShape().getNbColumns()/2, getShape().getNbRows()/2));
 		
-		setChanged();
-		notifyObservers();
+		update();
 		
 		return getCentre();
 	}
@@ -74,8 +152,7 @@ public class Piece extends Observable {
 	public void setPlaced(boolean placed) {
 		isPlaced = placed;
 		
-		setChanged();
-		notifyObservers();
+		update();
 	}
 	
 	public Point getPosition() {
@@ -88,8 +165,7 @@ public class Piece extends Observable {
 		
 		this.position = position;
 		
-		setChanged();
-		notifyObservers();
+		update();
 	}
 	
 	public @NotNull Shape getShape() {
@@ -122,8 +198,7 @@ public class Piece extends Observable {
 	public void setCentre(Point centre) {
 		this.centre = centre;
 		
-		setChanged();
-		notifyObservers();
+		update();
 	}
 	
 	public @NotNull Color getColor() {
@@ -136,8 +211,7 @@ public class Piece extends Observable {
 		
 		this.color = color;
 		
-		setChanged();
-		notifyObservers();
+		update();
 	}
 	
 	/* OVERRIDES */

@@ -11,7 +11,7 @@ import main.fr.polytech.arcade.game.grid.SquareType;
 
 @Deprecated
 public class PieceController {
-	
+	/*
 	public @NotNull Piece rotate(@NotNull Piece piece) {
 		Piece rotatedPiece = new Piece();
 		
@@ -29,7 +29,7 @@ public class PieceController {
 		Piece invertedPiece = new Piece();
 		
 		return piece;
-	}
+	}*/
 	
 	/*
 	public synchronized @Nullable Couple<Grid, Piece> move(@NotNull Grid grid, @NotNull Piece piece, @NotNull Point destination) {

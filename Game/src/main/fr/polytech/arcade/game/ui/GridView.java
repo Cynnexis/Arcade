@@ -27,30 +27,12 @@ public class GridView extends BorderPane {
 	private double lineStroke;
 	private int tileDimension;
 	
-	@NotNull
-	private ArrayList<GridHandler> gridHandlers;
-	
 	public GridView() {
 		super();
 		setBackgroundColor(Color.WHITE);
 		setLineColor(Color.GRAY);
 		setTileDimension(50);
 		setLineStroke(1d);
-		
-		addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				GridView.this.requestFocus();
-				
-				int x = (int) Math.floor(event.getX() / (getTileDimension() + getLineStroke()));
-				int y = (int) Math.floor(event.getY() / (getTileDimension() + getLineStroke()));
-				
-				System.out.println("[" + x + " ; " + y + "]");
-				
-				for (GridHandler gh : getGridHandlers())
-					gh.onTileClicked(x, y);
-			}
-		});
 	}
 	
 	public void update(@NotNull Grid grid) {
@@ -134,26 +116,5 @@ public class GridView extends BorderPane {
 			throw new IllegalArgumentException("The dimension of the tiles must be greater than 0.");
 		
 		this.tileDimension = dimension;
-	}
-	
-	public @NotNull ArrayList<GridHandler> getGridHandlers() {
-		if (gridHandlers == null)
-			gridHandlers = new ArrayList<>();
-		
-		return gridHandlers;
-	}
-	
-	public void setGridHandlers(@NotNull ArrayList<GridHandler> gridHandlers) {
-		if (gridHandlers == null)
-			throw new NullPointerException();
-		
-		this.gridHandlers = gridHandlers;
-	}
-	
-	public void addGridHandler(@NotNull GridHandler gridHandler) {
-		if (gridHandler == null)
-			throw new NullPointerException();
-		
-		this.gridHandlers.add(gridHandler);
 	}
 }
