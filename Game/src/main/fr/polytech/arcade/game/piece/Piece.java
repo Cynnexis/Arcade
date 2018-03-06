@@ -12,6 +12,8 @@ public class Piece extends Observable {
 	
 	private boolean isPlaced;
 	@NotNull
+	private Point position;
+	@NotNull
 	private Shape shape;
 	@NotNull
 	private Point centre;
@@ -20,35 +22,34 @@ public class Piece extends Observable {
 	
 	/* CONSTRUCTORS */
 	
-	public Piece() {
-		setPlaced(false);
-		setShape(new Shape());
-		setColor(Color.BLACK);
+	public Piece(boolean isPlaced, @NotNull Point position, @NotNull Shape shape, @NotNull Point centre, @NotNull Color color) {
+		setPlaced(isPlaced);
+		setPosition(position);
+		setShape(shape);
+		setCentre(centre);
+		setColor(color);
+	}
+	public Piece(boolean isPlaced, @NotNull Point position, @NotNull Shape shape, @NotNull Color color) {
+		this(isPlaced, position, shape, new Point(0, 0), color);
 		updateCenter();
 	}
-	public Piece(boolean isPlaced) {
-		setPlaced(isPlaced);
-		setShape(new Shape());
-		setColor(Color.BLACK);
-		updateCenter();
+	public Piece(@NotNull Point position, @NotNull Shape shape, @NotNull Color color) {
+		this(true, position, shape, color);
+	}
+	public Piece(@NotNull Point position, @NotNull Shape shape) {
+		this(position, shape, Color.BLACK);
+	}
+	public Piece(@NotNull Point position) {
+		this(position, new Shape());
 	}
 	public Piece(@NotNull Shape shape) {
-		setPlaced(false);
-		setShape(shape);
-		setColor(Color.BLACK);
-		updateCenter();
+		this(new Point(0, 0), shape);
 	}
-	public Piece(@NotNull Color color) {
-		setPlaced(false);
-		setShape(shape);
-		setColor(color);
-		updateCenter();
+	public Piece(@NotNull Piece copy) {
+		this(copy.isPlaced(), copy.getPosition(), copy.getShape(), copy.getCentre(), copy.getColor());
 	}
-	public Piece(boolean isPlaced, @NotNull Shape shape, @NotNull Color color) {
-		setPlaced(isPlaced);
-		setShape(shape);
-		setColor(color);
-		updateCenter();
+	public Piece() {
+		this(new Shape());
 	}
 	
 	/**
@@ -77,6 +78,20 @@ public class Piece extends Observable {
 		notifyObservers();
 	}
 	
+	public Point getPosition() {
+		return position;
+	}
+	
+	public void setPosition(@NotNull Point position) {
+		if (position == null)
+			throw new NullPointerException();
+		
+		this.position = position;
+		
+		setChanged();
+		notifyObservers();
+	}
+	
 	public @NotNull Shape getShape() {
 		if (this.shape == null)
 			this.shape = new Shape();
@@ -90,6 +105,14 @@ public class Piece extends Observable {
 		
 		this.shape = shape;
 		updateCenter();
+	}
+	
+	/**
+	 * Get the dimension of the piece according to its <c>position</c> and <c>shape</c>
+	 * @return Return the result of the addition of the vectors <c>position</c> and <c>shape</c>.
+	 */
+	public @NotNull Point getDimension() {
+		return new Point(getPosition().getX() + getShape().getNbColumns() - 1, getPosition().getY() + getShape().getNbRows() - 1);
 	}
 	
 	public Point getCentre() {
@@ -131,16 +154,16 @@ public class Piece extends Observable {
 		
 		StringBuilder representation = new StringBuilder("");
 		
-		for (int i = 0; i < getShape().getNbColumns(); i++) {
-			for (int j = 0; j < getShape().getNbRows(); j++) {
-				if (getShape().get(i, j)) {
-					if (Objects.equals(getCentre(), new Point(i, j)))
+		for (int i = 0; i < getShape().getNbRows(); i++) {
+			for (int j = 0; j < getShape().getNbColumns(); j++) {
+				if (getShape().get(j, i)) {
+					if (Objects.equals(getCentre(), new Point(j, i)))
 						representation.append(centerSquare);
 					else
 						representation.append(c);
 				}
 				else {
-					if (Objects.equals(getCentre(), new Point(i, j)))
+					if (Objects.equals(getCentre(), new Point(j, i)))
 						representation.append(centerCircle);
 					else
 						representation.append(' ');

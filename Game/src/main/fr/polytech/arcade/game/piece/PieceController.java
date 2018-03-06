@@ -1,14 +1,15 @@
 package main.fr.polytech.arcade.game.piece;
 
 import com.sun.corba.se.impl.encoding.CDROutputObject;
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import fr.berger.enhancedlist.Couple;
 import fr.berger.enhancedlist.Point;
 import main.fr.polytech.arcade.game.grid.Grid;
 import main.fr.polytech.arcade.game.grid.Square;
 import main.fr.polytech.arcade.game.grid.SquareType;
 
+@Deprecated
 public class PieceController {
 	
 	public @NotNull Piece rotate(@NotNull Piece piece) {
@@ -25,11 +26,12 @@ public class PieceController {
 	}
 	
 	public @NotNull Piece invert(@NotNull Piece piece, @NotNull Axis axis) {
-		Piece rotatedPiece = new Piece();
+		Piece invertedPiece = new Piece();
 		
 		return piece;
 	}
 	
+	/*
 	public synchronized @Nullable Couple<Grid, Piece> move(@NotNull Grid grid, @NotNull Piece piece, @NotNull Point destination) {
 		if (grid == null || piece == null)
 			throw new NullPointerException();
@@ -99,5 +101,5 @@ public class PieceController {
 			default:
 				return move(grid, piece, pos.getX() - 1, pos.getY());
 		}
-	}
+	}*/
 }

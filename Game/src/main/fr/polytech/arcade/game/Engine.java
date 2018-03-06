@@ -1,12 +1,13 @@
 package main.fr.polytech.arcade.game;
 
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import main.fr.polytech.arcade.game.grid.Grid;
 import main.fr.polytech.arcade.game.piece.Piece;
 
 import java.util.ArrayList;
 
+@Deprecated
 public abstract class Engine {
 	
 	@NotNull

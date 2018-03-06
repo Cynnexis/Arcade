@@ -1,9 +1,15 @@
 package test.tetris;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import main.fr.polytech.arcade.game.grid.GridController;
+import main.fr.polytech.arcade.game.piece.Piece;
 import main.fr.polytech.arcade.game.piece.PieceBuilder;
 import main.fr.polytech.arcade.game.ui.GridView;
 
@@ -26,30 +32,58 @@ public class Tetris extends Application {
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		TetrisEngine tengine = new TetrisEngine();
-		GridView vg = new GridView(tengine.getGrid());
+		GridController g_controller = new GridController();
 		
-		tengine.getGrid().addPiece(new PieceBuilder()
+		boolean r1 = g_controller.getGrid().add(new PieceBuilder()
+				.setPosition(0, 0)
 				.setShape(new int[][]
 						{
 								{1, 0},
 								{1, 1}
 						})
 				.setColor(Color.CYAN)
-				.createPiece(), 0, 0);
+				.createPiece());
 		
-		tengine.getGrid().addPiece(new PieceBuilder()
+		boolean r2 = g_controller.getGrid().add(new PieceBuilder()
+				.setPosition(1, 0)
 				.setShape(new int[][]
 						{
 								{1, 1},
 								{0, 1}
 						})
 				.setColor(Color.RED)
-				.createPiece(), 1, 0);
+				.createPiece());
 		
-		vg.update();
+		boolean r3 = g_controller.getGrid().add(new PieceBuilder()
+				.setPosition(4, 4)
+				.setShape(new int[][]
+						{
+								{1, 0, 1},
+								{1, 1, 1}
+						})
+				.setColor(Color.GREEN)
+				.setCenter(1, 1)
+				.createPiece());
 		
-		Scene scene = new Scene(vg);
+		g_controller.getView().setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				//
+			}
+		});
+		g_controller.update();
+		
+		System.out.println("Tetris.start> r1 = " + r1 + " ; r2 = " + r2 + " ; r3 = " + r3);
+		
+		for (int i = 0; i < g_controller.getGrid().getPieces().size(); i++)
+			System.out.println("Tetris.start> piece n°" + i + ":\n" + g_controller.getGrid().getPieces().get(i).toString());
+		
+		BorderPane bp_main = new BorderPane();
+		
+		bp_main.setCenter(g_controller.getView());
+		bp_main.setTop(new Text("Test"));
+		
+		Scene scene = new Scene(bp_main);
 		
 		primaryStage.setTitle("Tetris");
 		primaryStage.setScene(scene);
