@@ -1,13 +1,13 @@
 package main.fr.polytech.arcade.game.grid;
 
 import fr.berger.enhancedlist.Point;
-import fr.berger.enhancedlist.matrix.Matrix;
 import main.fr.polytech.arcade.game.AbstractModel;
 import main.fr.polytech.arcade.game.piece.Piece;
 import main.fr.polytech.arcade.game.piece.Shape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Observable;
@@ -15,9 +15,23 @@ import java.util.Observer;
 
 public class Grid extends AbstractModel implements Observer {
 	
+	/**
+	 * The ArrayList which contains all the piece.
+	 * Grid does not actually contains a matrix of tiles, but only a set of pieces with a position (x ; y) for each
+	 * of them. This level of abstraction is managed through get(int, int) and set(int, int)
+	 * @see Piece
+	 */
 	@NotNull
 	private ArrayList<Piece> pieces;
 	
+	/**
+	 * The index of <c>pieces</c> of the focused piece. If <c>currentPiece < 0</c>, then there is not active piece.
+	 */
+	private int currentPiece;
+	
+	/**
+	 * The dimension of the Grid (width ; height)
+	 */
 	@NotNull
 	private Point dimension;
 	
@@ -69,19 +83,22 @@ public class Grid extends AbstractModel implements Observer {
 		for (int i = destination.getX(); i < destination.getX() + piece.getShape().getNbColumns(); i++) {
 			for (int j = destination.getY(); j < destination.getY() + piece.getShape().getNbRows(); j++) {
 				
-				Piece currentPiece = get(i, j);
-				if (currentPiece != null && !Objects.equals(currentPiece, piece)) {
-					Shape sh = currentPiece.getShape();
-					Point pos = currentPiece.getPosition();
-					
-					int x = i - pos.getX();
-					int y = j - pos.getY();
-					
-					if (sh != null &&
-							pos != null &&
-							sh.get(x, y) &&
-							piece.getShape().get(i - destination.getX(), j - destination.getY()))
-						return false;
+				//Piece currentPiece = get(i, j);
+				ArrayList<Piece> currentPieces = getAll(i, j);
+				for (Piece currentPiece : currentPieces) {
+					if (currentPiece != null && !Objects.equals(currentPiece, piece)) {
+						Shape sh = currentPiece.getShape();
+						Point pos = currentPiece.getPosition();
+						
+						int x = i - pos.getX();
+						int y = j - pos.getY();
+						
+						if (sh != null &&
+								pos != null &&
+								sh.get(x, y) &&
+								piece.getShape().get(i - destination.getX(), j - destination.getY()))
+							return false;
+					}
 				}
 			}
 		}
@@ -95,6 +112,12 @@ public class Grid extends AbstractModel implements Observer {
 		return checkIfPieceCanBePlaced(piece, piece.getPosition());
 	}
 	
+	/**
+	 * Indicate if the given piece can be in its current position
+	 * @param piece the piece to check
+	 * @return true if the piece can stay at its place, false otherwise
+	 * @see Piece
+	 */
 	private boolean move(@NotNull Piece piece) {
 		if (piece == null)
 			throw new NullPointerException();
@@ -108,11 +131,11 @@ public class Grid extends AbstractModel implements Observer {
 		
 		// Check if the position of the piece is in the grid
 		if (!checkIndexes(piece.getPosition()))
-			throw new ArrayIndexOutOfBoundsException();
+			return false;
 		
 		// Check if the dimension of the piece (position + shape) is not out of the grid
 		if (!checkIndexes(piece.getDimension()))
-			throw new ArrayIndexOutOfBoundsException();
+			return false;
 		
 		// Check if there is another piece already in the grid at the position of 'piece'
 		if (!checkIfPieceCanBePlaced(piece))
@@ -121,6 +144,13 @@ public class Grid extends AbstractModel implements Observer {
 		// The piece can go there
 		return true;
 	}
+	
+	/**
+	 * Move <c>piece</c> at the coordinates <c>destination</c> if it is possible (no overlap, and not out of bound)
+	 * @param piece
+	 * @param destination
+	 * @return
+	 */
 	public boolean move(@NotNull Piece piece, @NotNull Point destination) {
 		if (piece == null || destination == null)
 			throw new NullPointerException();
@@ -138,9 +168,46 @@ public class Grid extends AbstractModel implements Observer {
 			piece.setPosition(oldPos);
 		
 		if (result)
-			update();
+			snap();
 		
 		return result;
+	}
+	
+	@NotNull
+	public ArrayList<Piece> getAll(@NotNull Point point) {
+		if (point == null)
+			throw new NullPointerException();
+		
+		if (!checkIndexes(point))
+			throw new ArrayIndexOutOfBoundsException();
+		
+		ArrayList<Piece> list = new ArrayList<>();
+		
+		for (int i = 0; i < getPieces().size(); i++) {
+			Piece currentPiece = getPieces().get(i);
+			
+			if (currentPiece != null) {
+				Point pos = currentPiece.getPosition();
+				Shape sh = currentPiece.getShape();
+				
+				if (pos != null && sh != null) {
+					int minX = pos.getX();
+					int minY = pos.getY();
+					
+					int maxX = minX + sh.getNbColumns() - 1;
+					int maxY = minY + sh.getNbRows() - 1;
+					
+					if (minX <= point.getX() && point.getX() <= maxX &&
+							minY <= point.getY() && point.getY() <= maxY)
+						list.add(currentPiece);
+				}
+			}
+		}
+		
+		return list;
+	}
+	public ArrayList<Piece> getAll(int x, int y) {
+		return getAll(new Point(x, y));
 	}
 	
 	/**
@@ -216,7 +283,7 @@ public class Grid extends AbstractModel implements Observer {
 		// Now, the piece can be placed
 		addPiece(piece);
 		
-		update();
+		snap();
 		
 		return true;
 	}
@@ -249,15 +316,79 @@ public class Grid extends AbstractModel implements Observer {
 		
 		this.pieces = pieces;
 		
-		update();
+		snap();
 	}
 	
-	protected void addPiece(@NotNull Piece piece) {
+	protected boolean addPiece(@NotNull Piece piece) {
 		if (piece == null)
 			throw new NullPointerException();
 		
 		piece.addObserver(this);
-		getPieces().add(piece);
+		boolean result = getPieces().add(piece);
+		
+		if (result)
+			setFocusedPiece(getPieces().size() - 1);
+		
+		return result;
+	}
+	
+	protected int getCurrentPiece() {
+		return currentPiece;
+	}
+	
+	protected void setCurrentPiece(int currentPiece) {
+		this.currentPiece = currentPiece;
+	}
+	
+	/**
+	 * Indicate if there is a focused piece
+	 * @return Return true if there is a current piece, false otherwise
+	 */
+	public boolean hasFocusedPiece() {
+		return this.currentPiece >= 0;
+	}
+	
+	/**
+	 * Getter for the current focused piece. The focused piece is given by <c>currentPiece</c>. If <c>currentPiece</c>
+	 * is out of the array, <c>null</c> is returned.
+	 * @return Return the focused piece or null if no piece are currently focused
+	 */
+	@Nullable
+	public Piece getFocusedPiece() {
+		if (getCurrentPiece() < 0)
+			return null;
+		else {
+			try {
+				return getPieces().get(getCurrentPiece());
+			} catch (IndexOutOfBoundsException ignored) {
+				setCurrentPiece(-1);
+				return null;
+			}
+		}
+	}
+	
+	/**
+	 * Set the focused piece to the given index
+	 * @param index The index of the ArrayList <c>Grid.getPieces()</c>. If index is out of bound, then reset the focus
+	 *              (no piece will have the focus)
+	 */
+	public void setFocusedPiece(int index) {
+		if (0 <= index && index < getPieces().size())
+			setCurrentPiece(index);
+		else
+			setCurrentPiece(-1);
+	}
+	
+	/**
+	 * Set the focused piece to the given piece
+	 * @param piece The piece to put the focus on. If the piece is null or does not belong to the grid, then reset the
+	 *              focus (no piece will have the focus)
+	 */
+	public void setFocusedPiece(@Nullable Piece piece) {
+		if (piece == null)
+			setFocusedPiece(null);
+		else
+			setCurrentPiece(getIdFromPiece(piece));
 	}
 	
 	public @NotNull Point getDimension() {
@@ -281,7 +412,7 @@ public class Grid extends AbstractModel implements Observer {
 		
 		this.dimension = dimension;
 		
-		update();
+		snap();
 	}
 	public Point setDimension(int width, int height) {
 		setDimension(new Point(width, height));
@@ -310,6 +441,6 @@ public class Grid extends AbstractModel implements Observer {
 	@Override
 	public void update(Observable observable, Object o) {
 		if (observable != null && observable instanceof Piece)
-			update();
+			snap();
 	}
 }

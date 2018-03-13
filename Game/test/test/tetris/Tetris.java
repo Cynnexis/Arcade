@@ -1,8 +1,11 @@
 package test.tetris;
 
+import fr.berger.enhancedlist.Point;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
@@ -15,6 +18,8 @@ import main.fr.polytech.arcade.game.piece.Piece;
 import main.fr.polytech.arcade.game.piece.PieceBuilder;
 import main.fr.polytech.arcade.game.ui.GridHandler;
 import main.fr.polytech.arcade.game.ui.GridView;
+
+import java.util.Objects;
 
 public class Tetris extends Application {
 	
@@ -73,11 +78,42 @@ public class Tetris extends Application {
 			public void onTileClicked(int x, int y) {
 				System.out.println("Tetris.onTileClicked> (" + x + " ; " + y + ")");
 				
-				Piece p = g_controller.getGrid().get(4, 4);
+				/*Piece p = g_controller.getGrid().get(4, 4);
 				
 				if (p != null) {
 					p.rotate(Direction.WEST);
 					p.setColor(Color.PURPLE);
+				}*/
+				
+				Piece clickedPiece = g_controller.getGrid().get(x, y);
+				g_controller.getGrid().setFocusedPiece(clickedPiece);
+			}
+		});
+		
+		//g_controller.getView().addEventFilter(KeyEvent.KEY_PRESSED,
+		g_controller.getView().setOnKeyPressed(new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent event) {
+				Piece piece = g_controller.getGrid().getFocusedPiece();
+				
+				//System.out.println("Tetris.handle (key)> key : " + event.getCode().name() + "\tpiece : " + Objects.toString(piece));
+				
+				if (piece != null) {
+					switch (event.getCode())
+					{
+						case Z:
+							g_controller.getGrid().move(piece, new Point(piece.getPosition().getX(), piece.getPosition().getY() - 1));
+							break;
+						case Q:
+							g_controller.getGrid().move(piece, new Point(piece.getPosition().getX() - 1, piece.getPosition().getY()));
+							break;
+						case S:
+							g_controller.getGrid().move(piece, new Point(piece.getPosition().getX(), piece.getPosition().getY() + 1));
+							break;
+						case D:
+							g_controller.getGrid().move(piece, new Point(piece.getPosition().getX() + 1, piece.getPosition().getY()));
+							break;
+					}
 				}
 			}
 		});

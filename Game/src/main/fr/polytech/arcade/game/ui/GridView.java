@@ -56,11 +56,16 @@ public class GridView extends BorderPane {
 					int x = i - currentPiece.getPosition().getX();
 					int y = j - currentPiece.getPosition().getY();
 					
-					if (currentPiece.getShape() != null && currentPiece.getPosition() != null &&
-							currentPiece.getShape().get(x, y))
-						rect.setFill(currentPiece.getColor());
-					else
+					try {
+						if (currentPiece.getShape() != null && currentPiece.getPosition() != null &&
+								currentPiece.getShape().get(x, y)) {
+								rect.setFill(currentPiece.getColor());
+						}
+						else
+							rect.setFill(getBackgroundColor());
+					} catch (IndexOutOfBoundsException ignored) {
 						rect.setFill(getBackgroundColor());
+					}
 				}
 				else
 					rect.setFill(getBackgroundColor());

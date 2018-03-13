@@ -3,11 +3,9 @@ package main.fr.polytech.arcade.game.piece;
 import fr.berger.enhancedlist.Point;
 import javafx.scene.paint.Color;
 import main.fr.polytech.arcade.game.AbstractModel;
-import main.fr.polytech.arcade.game.grid.Grid;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
-import java.util.Observable;
 
 public class Piece extends AbstractModel {
 	
@@ -138,7 +136,7 @@ public class Piece extends AbstractModel {
 	public Point updateCenter() {
 		setCentre(new Point(getShape().getNbColumns()/2, getShape().getNbRows()/2));
 		
-		update();
+		snap();
 		
 		return getCentre();
 	}
@@ -152,10 +150,10 @@ public class Piece extends AbstractModel {
 	public void setPlaced(boolean placed) {
 		isPlaced = placed;
 		
-		update();
+		snap();
 	}
 	
-	public Point getPosition() {
+	public @NotNull Point getPosition() {
 		return position;
 	}
 	
@@ -165,7 +163,7 @@ public class Piece extends AbstractModel {
 		
 		this.position = position;
 		
-		update();
+		snap();
 	}
 	
 	public @NotNull Shape getShape() {
@@ -198,7 +196,7 @@ public class Piece extends AbstractModel {
 	public void setCentre(Point centre) {
 		this.centre = centre;
 		
-		update();
+		snap();
 	}
 	
 	public @NotNull Color getColor() {
@@ -211,7 +209,7 @@ public class Piece extends AbstractModel {
 		
 		this.color = color;
 		
-		update();
+		snap();
 	}
 	
 	/* OVERRIDES */

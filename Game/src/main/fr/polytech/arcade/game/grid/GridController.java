@@ -78,6 +78,7 @@ public class GridController implements Observer {
 			throw new NullPointerException();
 		
 		this.view = view;
+		this.view.requestFocus();
 	}
 	
 	public @NotNull ArrayList<GridHandler> getGridHandlers() {
