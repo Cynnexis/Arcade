@@ -386,7 +386,7 @@ public class Grid extends AbstractModel implements Observer {
 	 */
 	public void setFocusedPiece(@Nullable Piece piece) {
 		if (piece == null)
-			setFocusedPiece(null);
+			setFocusedPiece(-1);
 		else
 			setCurrentPiece(getIdFromPiece(piece));
 	}

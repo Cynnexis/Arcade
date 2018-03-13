@@ -76,6 +76,26 @@ public class Piece extends AbstractModel {
 		return this;
 	}
 	
+	public @NotNull Piece rotateAnticlockwise90() {
+		Shape rotated = new Shape(getShape().getNbRows(), getShape().getNbColumns());
+		
+		int x, y;
+		boolean result;
+		
+		for (int i = 0; i < getShape().getNbColumns(); i++) {
+			for (int j = 0; j < getShape().getNbRows(); j++) {
+				x = getShape().getNbRows() - j - 1;
+				y = i;
+				result = getShape().get(i, j);
+				rotated.set(x, y, result);
+			}
+		}
+		
+		setShape(rotated);
+		
+		return this;
+	}
+	
 	public @NotNull Piece invert(@NotNull Axis axis) {
 		Shape inverted = new Shape(getShape().getNbColumns(), getShape().getNbRows());
 		

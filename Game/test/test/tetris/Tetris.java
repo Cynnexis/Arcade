@@ -113,6 +113,8 @@ public class Tetris extends Application {
 						case D:
 							g_controller.getGrid().move(piece, new Point(piece.getPosition().getX() + 1, piece.getPosition().getY()));
 							break;
+						case R:
+							piece.rotateAnticlockwise90();
 					}
 				}
 			}
