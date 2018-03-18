@@ -1,8 +1,11 @@
 package main.fr.polytech.arcade.game.piece;
 
 import com.sun.istack.internal.NotNull;
+import com.sun.istack.internal.Nullable;
 import fr.berger.enhancedlist.Point;
 import javafx.scene.paint.Color;
+
+import java.util.Random;
 
 public class PieceBuilder {
 	
@@ -103,5 +106,111 @@ public class PieceBuilder {
 		
 		piece.updateCenter();
 		return piece;
+	}
+	
+	/* TEMPLATES */
+	
+	public static  @NotNull Piece randomTemplate(@Nullable Random rand) {
+		if (rand == null)
+			rand = new Random();
+		
+		switch (rand.nextInt(7))
+		{
+			case 0:
+				return templateI();
+			case 1:
+				return templateJ();
+			case 2:
+				return templateL();
+			case 3:
+				return templateO();
+			case 4:
+				return templateS();
+			case 5:
+				return templateT();
+			default:
+				return templateZ();
+		}
+	}
+	public static  @NotNull Piece randomTemplate() {
+		return randomTemplate(null);
+	}
+	
+	// See https://en.wikipedia.org/wiki/Tetris#Tetromino_colors
+	
+	public static  @NotNull Piece templateI() {
+		return new PieceBuilder()
+				.setShape(new int[][]
+				{
+						{1, 1, 1, 1}
+				})
+				.setColor(Color.CYAN)
+				.createPiece();
+	}
+	
+	public static @NotNull Piece templateJ() {
+		return new PieceBuilder()
+				.setShape(new int[][]
+				{
+						{1, 1, 1},
+						{0, 0, 1}
+				})
+				.setColor(Color.BLUE)
+				.createPiece();
+	}
+	
+	public static @NotNull Piece templateL() {
+		return new PieceBuilder()
+				.setShape(new int[][]
+				{
+						{1, 1, 1},
+						{1, 0, 0}
+				})
+				.setColor(Color.ORANGE)
+				.createPiece();
+	}
+	
+	public static @NotNull Piece templateO() {
+		return new PieceBuilder()
+				.setShape(new int[][]
+				{
+						{1, 1},
+						{1, 1}
+				})
+				.setColor(Color.YELLOW)
+				.createPiece();
+	}
+	
+	public static @NotNull Piece templateS() {
+		return new PieceBuilder()
+				.setShape(new int[][]
+				{
+						{0, 1, 1},
+						{1, 1, 0}
+				})
+				.setColor(Color.GREEN)
+				.createPiece();
+	}
+	
+	public static  @NotNull Piece templateT() {
+		return new PieceBuilder()
+				.setShape(new int[][]
+				{
+						{1, 1, 1},
+						{0, 1, 0}
+				})
+				.setColor(Color.PURPLE)
+				.createPiece();
+	}
+	
+	public static @NotNull Piece templateZ() {
+		return new PieceBuilder()
+				.setShape(new int[][]
+				{
+						{1, 1, 0},
+						{0, 1, 1}
+				})
+				.setColor(Color.RED)
+				.createPiece();
 	}
 }

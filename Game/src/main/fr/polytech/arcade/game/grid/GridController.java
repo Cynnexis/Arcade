@@ -2,6 +2,7 @@ package main.fr.polytech.arcade.game.grid;
 
 import fr.berger.enhancedlist.Point;
 import javafx.event.EventHandler;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import main.fr.polytech.arcade.game.piece.Piece;
 import main.fr.polytech.arcade.game.piece.Shape;
@@ -43,6 +44,14 @@ public class GridController implements Observer {
 				
 				for (GridHandler gh : getGridHandlers())
 					gh.onTileClicked(x, y);
+			}
+		});
+		
+		getView().setOnKeyPressed(new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent event) {
+				for (GridHandler gh : getGridHandlers())
+					gh.onKeyPressed(event.getCode());
 			}
 		});
 	}
