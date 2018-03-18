@@ -51,33 +51,32 @@ public class Piece extends AbstractModel {
 		this(new Shape());
 	}
 	
-	public @NotNull Piece rotate(@NotNull Direction direction) {
-		Shape rotated = new Shape(getShape().getNbColumns(), getShape().getNbRows());
-		
-		switch (direction)
+	public @NotNull Piece rotate(int degreeClockwise) {
+		switch (degreeClockwise)
 		{
-			case NORTH:
+			case 90:
+				rotateClockwise90();
 				break;
-			case EAST:
-				transpose();
-				reverseColumns();
+			case 180:
+				rotateClockwise90();
+				rotateClockwise90();
 				break;
-			case SOUTH:
-				invert(Axis.HORIZONTAL);
-				invert(Axis.VERTICAL);
+			case 270:
+				rotateClockwise90();
+				rotateClockwise90();
+				rotateClockwise90();
 				break;
-			case WEST:
-				transpose();
-				reverseColumns();
+			default:
 				break;
 		}
 		
-		//setShape(rotated);
 		return this;
 	}
 	
-	public @NotNull Piece rotateAnticlockwise90() {
+	public @NotNull Piece rotateClockwise90() {
 		Shape rotated = new Shape(getShape().getNbRows(), getShape().getNbColumns());
+		
+		Point oldCenter = getCentre();
 		
 		int x, y;
 		boolean result;
@@ -92,6 +91,14 @@ public class Piece extends AbstractModel {
 		}
 		
 		setShape(rotated);
+		
+		// Update gravity center
+		setCentre(new Point(getShape().getNbColumns() - oldCenter.getY() - 1, oldCenter.getX()));
+		
+		// Update position according to the gravity center
+		x = getPosition().getX();
+		y = getPosition().getY();
+		setPosition(new Point(x + (oldCenter.getX() - getCentre().getX()), y + (oldCenter.getY() - getCentre().getY())));
 		
 		return this;
 	}

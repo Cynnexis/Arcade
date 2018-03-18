@@ -4,22 +4,15 @@ import fr.berger.enhancedlist.Point;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import main.fr.polytech.arcade.game.grid.GridController;
-import main.fr.polytech.arcade.game.piece.Axis;
-import main.fr.polytech.arcade.game.piece.Direction;
 import main.fr.polytech.arcade.game.piece.Piece;
 import main.fr.polytech.arcade.game.piece.PieceBuilder;
 import main.fr.polytech.arcade.game.ui.GridHandler;
-import main.fr.polytech.arcade.game.ui.GridView;
-
-import java.util.Objects;
 
 public class Tetris extends Application {
 	
@@ -76,7 +69,7 @@ public class Tetris extends Application {
 		g_controller.addGridHandler(new GridHandler() {
 			@Override
 			public void onTileClicked(int x, int y) {
-				System.out.println("Tetris.onTileClicked> (" + x + " ; " + y + ")");
+				System.out.print("Tetris.onTileClicked> (" + x + " ; " + y + ")");
 				
 				/*Piece p = g_controller.getGrid().get(4, 4);
 				
@@ -87,6 +80,11 @@ public class Tetris extends Application {
 				
 				Piece clickedPiece = g_controller.getGrid().get(x, y);
 				g_controller.getGrid().setFocusedPiece(clickedPiece);
+				
+				if (clickedPiece != null)
+					System.out.print(" piece :\n" + clickedPiece.toString());
+				
+				System.out.println();
 			}
 		});
 		
@@ -114,7 +112,7 @@ public class Tetris extends Application {
 							g_controller.getGrid().move(piece, new Point(piece.getPosition().getX() + 1, piece.getPosition().getY()));
 							break;
 						case R:
-							piece.rotateAnticlockwise90();
+							piece.rotateClockwise90();
 					}
 				}
 			}
