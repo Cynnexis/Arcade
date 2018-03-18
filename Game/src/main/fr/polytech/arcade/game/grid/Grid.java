@@ -96,6 +96,7 @@ public class Grid extends AbstractModel implements Observer {
 						if (sh != null &&
 								pos != null &&
 								sh.get(x, y) &&
+								currentPiece.isPlaced() &&
 								piece.getShape().get(i - destination.getX(), j - destination.getY()))
 							return false;
 					}
@@ -171,6 +172,38 @@ public class Grid extends AbstractModel implements Observer {
 			snap();
 		
 		return result;
+	}
+	
+	public boolean rotate(@NotNull Piece piece, int degreeClockwise) {
+		if (piece == null)
+			throw new NullPointerException();
+		
+		// Check if the piece is already in the list
+		int index = -1;
+		if ((index = getIdFromPiece(piece)) == -1)
+			return false;
+		
+		// Make the piece in the list as not placed
+		getPieces().get(index).setPlaced(false);
+		Piece copy = new Piece(piece);
+		copy.rotate(degreeClockwise);
+		copy.setPlaced(true);
+		
+		if (checkIfPieceCanBePlaced(copy)) {
+			getPieces().set(index, copy);
+			snap();
+			return true;
+		}
+		else {
+			getPieces().get(index).setPlaced(true);
+			return false;
+		}
+	}
+	public boolean rotate(int index, int degreeClockwise) {
+		if (!(0 <= index && index < getPieces().size()))
+			throw new ArrayIndexOutOfBoundsException();
+		
+		return rotate(getPieces().get(index), degreeClockwise);
 	}
 	
 	@NotNull

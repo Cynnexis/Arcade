@@ -119,51 +119,12 @@ public class Piece extends AbstractModel {
 		return this;
 	}
 	
-	public @NotNull Piece transpose() {
-		Shape transposed = new Shape(getShape().getNbRows(), getShape().getNbColumns());
-		
-		for (int i = 0; i < getShape().getNbColumns(); i++) {
-			for (int j = 0; j < getShape().getNbRows(); j++) {
-				try {
-					transposed.set(j, i, getShape().get(i, j));
-				} catch (IndexOutOfBoundsException ignored) { }
-				
-				try {
-					transposed.set(i, j, getShape().get(j, i));
-				} catch (IndexOutOfBoundsException ignored) { }
-			}
-		}
-		
-		setShape(transposed);
-		return this;
-	}
-	
-	public @NotNull Piece reverseColumns() {
-		Shape reversed = new Shape(getShape().getNbColumns(), getShape().getNbRows());
-		
-		for (int i = 0; i < getShape().getNbColumns(); i++) {
-			for (int j = 0, k = getShape().getNbRows() - 1; j < k; j++, k--) {
-				try {
-					reversed.set(j, i, getShape().get(k, i));
-				} catch (IndexOutOfBoundsException ignored) { }
-				try {
-					reversed.set(k, i, getShape().get(j, i));
-				} catch (IndexOutOfBoundsException ignored) { }
-			}
-		}
-		
-		setShape(reversed);
-		return this;
-	}
-	
 	/**
 	 * Update the gravity center of the piece according to the shape. Notify the observers at the end
 	 * @return Return the new gravity center of the piece
 	 */
 	public Point updateCenter() {
 		setCentre(new Point(getShape().getNbColumns()/2, getShape().getNbRows()/2));
-		
-		snap();
 		
 		return getCentre();
 	}
@@ -177,7 +138,7 @@ public class Piece extends AbstractModel {
 	public void setPlaced(boolean placed) {
 		isPlaced = placed;
 		
-		snap();
+		snap(isPlaced);
 	}
 	
 	public @NotNull Point getPosition() {
@@ -190,7 +151,7 @@ public class Piece extends AbstractModel {
 		
 		this.position = position;
 		
-		snap();
+		snap(this.position);
 	}
 	
 	public @NotNull Shape getShape() {
@@ -223,7 +184,7 @@ public class Piece extends AbstractModel {
 	public void setCentre(Point centre) {
 		this.centre = centre;
 		
-		snap();
+		snap(this.centre);
 	}
 	
 	public @NotNull Color getColor() {
@@ -236,7 +197,7 @@ public class Piece extends AbstractModel {
 		
 		this.color = color;
 		
-		snap();
+		snap(this.color);
 	}
 	
 	/* OVERRIDES */
