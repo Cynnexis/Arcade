@@ -3,10 +3,9 @@ package fr.polytech.arcade.tetris;
 import fr.berger.enhancedlist.Point;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -54,7 +53,7 @@ public class Main extends Application {
 
 		g_controller.addGridHandler(new GridHandler() {
 			@Override
-			public void onTileClicked(int x, int y) {
+			public void onTileClicked(int x, int y, @NotNull MouseButton mouseButton) {
 				Piece clickedPiece = g_controller.getGrid().get(x, y);
 				Piece focusedPiece = g_controller.getGrid().getFocusedPiece();
 				
@@ -121,9 +120,10 @@ public class Main extends Application {
 					// Check if row can be deleted
 					if (rowsToDelete().size() > 0)
 						System.out.println("Tetris> Rows to delete: " + rowsToDelete().toString());
+					deleteLastFilledRows();
 					
 					// Generate new piece
-					if (result == false)
+					if (!result)
 						generate();
 
 					lastUpdateNano = nowNano;
@@ -170,6 +170,27 @@ public class Main extends Application {
 		g_controller.getGrid().setFocusedPiece(g_controller.getGrid().getPieces().size() - 1);
 	}
 	
+	private boolean deleteLastFilledRows() {
+		ArrayList<Integer> rows = rowsToDelete();
+		
+		if (rows.isEmpty())
+			return false;
+		
+		boolean hasDeletedAtLeastOneRow = false;
+		
+		for (Integer y : rows)
+			for (int x = 0; x < g_controller.getGrid().getWidth(); x++)
+				if (g_controller.getGrid().deleteAt(x, y))
+					hasDeletedAtLeastOneRow = true;
+		
+		// If at least one row has been deleted, shift all pieces to the bottom
+		for (Piece piece : g_controller.getGrid().getPieces()) {
+			g_controller.getGrid().forceMove(piece, piece.getPosition().getX(), piece.getPosition().getY() + rows.size());
+		}
+		
+		return hasDeletedAtLeastOneRow;
+	}
+	
 	/**
 	 * Search all filled rows in the grid.
 	 * @return Return a list of row indexes that must be deleted.
@@ -200,6 +221,16 @@ public class Main extends Application {
 					// If the current tile (x ; y) is not filled, then the row cannot be deleted.
 					if (g_controller.getGrid().get(x, y) == null)
 						currentRowComplete = false;
+					// If a piece has been found at (x ; y), that does not mean that all the tiles of the piece are occupied.
+					else {
+						Piece piece = g_controller.getGrid().get(x, y);
+						@SuppressWarnings("ConstantConditions")
+						int xInPiece = x - piece.getPosition().getX();
+						int yInPiece = y - piece.getPosition().getY();
+						
+						if (!piece.getShape().get(xInPiece, yInPiece))
+							currentRowComplete = false;
+					}
 				}
 				
 				// If all the tile in the current row are filled, add the current to the list

@@ -11,8 +11,10 @@ import java.util.UUID;
 
 public class Piece extends AbstractModel {
 	
-	@NotNull
-	private UUID id;
+	/**
+	 * The id of a piece is represented by UUID
+	 */
+	private String id;
 	private boolean isPlaced;
 	@NotNull
 	private Point position;
@@ -26,7 +28,7 @@ public class Piece extends AbstractModel {
 	/* CONSTRUCTORS */
 	
 	public Piece(boolean isPlaced, @NotNull Point position, @NotNull Shape shape, @NotNull Point centre, @NotNull Color color) {
-		setId(UUID.randomUUID());
+		setId(UUID.randomUUID().toString());
 		setPlaced(isPlaced);
 		setPosition(position);
 		setShape(shape);
@@ -136,17 +138,17 @@ public class Piece extends AbstractModel {
 	
 	/* GETTERS & SETTERS */
 	
-	@Nullable
-	public UUID getId() {
-		if (this.id == null)
-			this.id = UUID.randomUUID();
+	@NotNull
+	public String getId() {
+		if (this.id == null || Objects.equals(this.id, ""))
+			this.id = UUID.randomUUID().toString();
 		
 		return id;
 	}
 	
-	public void setId(@Nullable UUID id) {
-		if (id == null)
-			this.id = UUID.randomUUID();
+	public void setId(@Nullable String id) {
+		if (id == null || Objects.equals(id, ""))
+			this.id = UUID.randomUUID().toString();
 		else
 			this.id = id;
 	}

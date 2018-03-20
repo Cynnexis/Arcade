@@ -7,16 +7,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4f19c868-a666-45ab-a576-b83f984bf58d" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/../RushHour/.idea/ant.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../RushHour/.idea/compiler.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../RushHour/.idea/description.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../RushHour/.idea/encodings.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../RushHour/.idea/gradle.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../RushHour/.idea/libraries/EnhancedList.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../RushHour/.idea/libraries/Game.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../RushHour/.idea/libraries/JetBrains_Annotations.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../RushHour/.idea/misc.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../RushHour/.idea/modules.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../RushHour/.idea/uiDesigner.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../RushHour/.idea/vcs.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../RushHour/RushHour.iml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../RushHour/lib/EnhancedList.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../RushHour/lib/Game.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../RushHour/lib/annotations-java8.jar" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../RushHour/src/fr/polytech/arcade/rushhour/GeneratePiece.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../RushHour/src/fr/polytech/arcade/rushhour/Main.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../Tetris/.idea/artifacts/Tetris.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../Tetris/META-INF/MANIFEST.MF" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/Game/Game.jar" afterPath="$PROJECT_DIR$/out/artifacts/Game/Game.jar" />
       <change beforePath="$PROJECT_DIR$/src/main/fr/polytech/arcade/game/grid/Grid.java" afterPath="$PROJECT_DIR$/src/main/fr/polytech/arcade/game/grid/Grid.java" />
       <change beforePath="$PROJECT_DIR$/src/main/fr/polytech/arcade/game/grid/GridController.java" afterPath="$PROJECT_DIR$/src/main/fr/polytech/arcade/game/grid/GridController.java" />
       <change beforePath="$PROJECT_DIR$/src/main/fr/polytech/arcade/game/piece/Piece.java" afterPath="$PROJECT_DIR$/src/main/fr/polytech/arcade/game/piece/Piece.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/fr/polytech/arcade/game/ui/GridHandler.java" afterPath="$PROJECT_DIR$/src/main/fr/polytech/arcade/game/ui/GridHandler.java" />
+      <change beforePath="$PROJECT_DIR$/test/test/testarea/TestArea.java" afterPath="$PROJECT_DIR$/test/test/testarea/TestArea.java" />
       <change beforePath="$PROJECT_DIR$/test/test/tetris/Tetris.java" afterPath="$PROJECT_DIR$/test/test/tetris/Tetris.java" />
-      <change beforePath="$PROJECT_DIR$/../Tetris/.idea/libraries/Game.xml" afterPath="$PROJECT_DIR$/../Tetris/.idea/libraries/Game.xml" />
+      <change beforePath="$PROJECT_DIR$/../Tetris/.idea/vcs.xml" afterPath="$PROJECT_DIR$/../Tetris/.idea/vcs.xml" />
       <change beforePath="$PROJECT_DIR$/../Tetris/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../Tetris/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/../Tetris/lib/Game.jar" afterPath="$PROJECT_DIR$/../Tetris/lib/Game.jar" />
-      <change beforePath="$PROJECT_DIR$/../Tetris/src/fr/polytech/arcade/tetris/Controller.java" afterPath="" />
       <change beforePath="$PROJECT_DIR$/../Tetris/src/fr/polytech/arcade/tetris/Main.java" afterPath="$PROJECT_DIR$/../Tetris/src/fr/polytech/arcade/tetris/Main.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -41,17 +62,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="Tetris.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Tetris.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/test/tetris/Tetris.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-273">
-              <caret line="35" column="7" lean-forward="true" selection-start-line="35" selection-start-column="7" selection-end-line="35" selection-end-column="7" />
+            <state relative-caret-position="378">
+              <caret line="58" column="84" lean-forward="false" selection-start-line="58" selection-start-column="84" selection-end-line="58" selection-end-column="84" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3525#3802#0" expanded="true" />
-                <element signature="e#3801#3802#0" expanded="true" />
-                <element signature="e#4941#4942#0" expanded="true" />
-                <element signature="e#4960#4961#0" expanded="true" />
+                <element signature="e#5075#5076#0" expanded="true" />
+                <element signature="e#5094#5095#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -60,12 +79,12 @@
       <file leaf-file-name="TestArea.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/test/testarea/TestArea.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1701">
-              <caret line="128" column="42" lean-forward="false" selection-start-line="128" selection-start-column="42" selection-end-line="128" selection-end-column="42" />
+            <state relative-caret-position="441">
+              <caret line="87" column="58" lean-forward="false" selection-start-line="87" selection-start-column="58" selection-end-line="87" selection-end-column="58" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4140#4141#0" expanded="true" />
-                <element signature="e#4159#4160#0" expanded="true" />
+                <element signature="e#4373#4374#0" expanded="true" />
+                <element signature="e#4392#4393#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -74,8 +93,8 @@
       <file leaf-file-name="GridHandler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/fr/polytech/arcade/game/ui/GridHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="7" column="37" lean-forward="false" selection-start-line="7" selection-start-column="37" selection-end-line="7" selection-end-column="37" />
+            <state relative-caret-position="168">
+              <caret line="8" column="69" lean-forward="false" selection-start-line="8" selection-start-column="69" selection-end-line="8" selection-end-column="69" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -86,7 +105,7 @@
       <file leaf-file-name="PieceBuilder.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/fr/polytech/arcade/game/piece/PieceBuilder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="819">
+            <state relative-caret-position="777">
               <caret line="210" column="33" lean-forward="false" selection-start-line="210" selection-start-column="33" selection-end-line="210" selection-end-column="33" />
               <folding>
                 <element signature="e#402#403#0" expanded="true" />
@@ -98,11 +117,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Grid.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Grid.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/fr/polytech/arcade/game/grid/Grid.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="82" column="0" lean-forward="false" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+            <state relative-caret-position="441">
+              <caret line="329" column="42" lean-forward="false" selection-start-line="329" selection-start-column="42" selection-end-line="329" selection-end-column="42" />
               <folding>
                 <element signature="e#1232#1233#0" expanded="true" />
                 <element signature="e#1265#1266#0" expanded="true" />
@@ -110,28 +129,34 @@
                 <element signature="e#1301#1302#0" expanded="true" />
                 <element signature="e#1593#1594#0" expanded="true" />
                 <element signature="e#1636#1637#0" expanded="true" />
-                <element signature="e#6919#6920#0" expanded="true" />
-                <element signature="e#6956#6957#0" expanded="true" />
-                <element signature="e#8516#8517#0" expanded="true" />
-                <element signature="e#8550#8551#0" expanded="true" />
-                <element signature="e#9742#9743#0" expanded="true" />
-                <element signature="e#9783#9784#0" expanded="true" />
-                <element signature="e#10406#10407#0" expanded="true" />
-                <element signature="e#10432#10433#0" expanded="true" />
-                <element signature="e#10486#10487#0" expanded="true" />
-                <element signature="e#10525#10526#0" expanded="true" />
-                <element signature="e#10683#10684#0" expanded="true" />
-                <element signature="e#10719#10720#0" expanded="true" />
-                <element signature="e#12027#12028#0" expanded="true" />
-                <element signature="e#12050#12051#0" expanded="true" />
-                <element signature="e#12077#12078#0" expanded="true" />
-                <element signature="e#12112#12113#0" expanded="true" />
-                <element signature="e#12140#12141#0" expanded="true" />
-                <element signature="e#12175#12176#0" expanded="true" />
-                <element signature="e#12654#12655#0" expanded="true" />
-                <element signature="e#12714#12715#0" expanded="true" />
-                <element signature="e#12753#12754#0" expanded="true" />
-                <element signature="e#12814#12815#0" expanded="true" />
+                <element signature="e#5248#5249#0" expanded="true" />
+                <element signature="e#5290#5291#0" expanded="true" />
+                <element signature="e#5788#5789#0" expanded="true" />
+                <element signature="e#5828#5829#0" expanded="true" />
+                <element signature="e#7352#7353#0" expanded="true" />
+                <element signature="e#7391#7392#0" expanded="true" />
+                <element signature="e#8281#8282#0" expanded="true" />
+                <element signature="e#8318#8319#0" expanded="true" />
+                <element signature="e#9878#9879#0" expanded="true" />
+                <element signature="e#9912#9913#0" expanded="true" />
+                <element signature="e#11104#11105#0" expanded="true" />
+                <element signature="e#11145#11146#0" expanded="true" />
+                <element signature="e#11768#11769#0" expanded="true" />
+                <element signature="e#11794#11795#0" expanded="true" />
+                <element signature="e#11848#11849#0" expanded="true" />
+                <element signature="e#11887#11888#0" expanded="true" />
+                <element signature="e#12045#12046#0" expanded="true" />
+                <element signature="e#12081#12082#0" expanded="true" />
+                <element signature="e#13389#13390#0" expanded="true" />
+                <element signature="e#13412#13413#0" expanded="true" />
+                <element signature="e#13439#13440#0" expanded="true" />
+                <element signature="e#13474#13475#0" expanded="true" />
+                <element signature="e#13502#13503#0" expanded="true" />
+                <element signature="e#13537#13538#0" expanded="true" />
+                <element signature="e#14016#14017#0" expanded="true" />
+                <element signature="e#14076#14077#0" expanded="true" />
+                <element signature="e#14115#14116#0" expanded="true" />
+                <element signature="e#14176#14177#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -140,20 +165,21 @@
       <file leaf-file-name="GridController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/fr/polytech/arcade/game/grid/GridController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="90" column="0" lean-forward="false" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
+            <state relative-caret-position="567">
+              <caret line="47" column="68" lean-forward="false" selection-start-line="47" selection-start-column="68" selection-end-line="47" selection-end-column="68" />
               <folding>
-                <element signature="e#2004#2005#0" expanded="true" />
-                <element signature="e#2037#2038#0" expanded="true" />
-                <element signature="e#2089#2090#0" expanded="true" />
-                <element signature="e#2129#2130#0" expanded="true" />
-                <element signature="e#2156#2157#0" expanded="true" />
-                <element signature="e#2179#2180#0" expanded="true" />
-                <element signature="e#2211#2212#0" expanded="true" />
-                <element signature="e#2242#2243#0" expanded="true" />
-                <element signature="e#2323#2324#0" expanded="true" />
-                <element signature="e#2602#2603#0" expanded="true" />
-                <element signature="e#2620#2621#0" expanded="true" />
+                <element signature="e#2023#2024#0" expanded="true" />
+                <element signature="e#2056#2057#0" expanded="true" />
+                <element signature="e#2108#2109#0" expanded="true" />
+                <element signature="e#2148#2149#0" expanded="true" />
+                <element signature="e#2175#2176#0" expanded="true" />
+                <element signature="e#2198#2199#0" expanded="true" />
+                <element signature="e#2230#2231#0" expanded="true" />
+                <element signature="e#2261#2262#0" expanded="true" />
+                <element signature="e#2324#2325#0" expanded="true" />
+                <element signature="e#2342#2343#0" expanded="true" />
+                <element signature="e#2621#2622#0" expanded="true" />
+                <element signature="e#2639#2640#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -181,17 +207,18 @@
       <file leaf-file-name="Piece.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/fr/polytech/arcade/game/piece/Piece.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="63">
-              <caret line="3" column="32" lean-forward="true" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
+            <state relative-caret-position="1134">
+              <caret line="242" column="56" lean-forward="false" selection-start-line="242" selection-start-column="56" selection-end-line="242" selection-end-column="56" />
               <folding>
-                <element signature="e#3833#3834#0" expanded="true" />
-                <element signature="e#3855#3856#0" expanded="true" />
-                <element signature="e#3984#3985#0" expanded="true" />
-                <element signature="e#4006#4007#0" expanded="true" />
-                <element signature="e#4838#4839#0" expanded="true" />
-                <element signature="e#4858#4859#0" expanded="true" />
-                <element signature="e#4988#4989#0" expanded="true" />
-                <element signature="e#5007#5008#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#3973#3974#0" expanded="true" />
+                <element signature="e#3995#3996#0" expanded="true" />
+                <element signature="e#4124#4125#0" expanded="true" />
+                <element signature="e#4146#4147#0" expanded="true" />
+                <element signature="e#4978#4979#0" expanded="true" />
+                <element signature="e#4998#4999#0" expanded="true" />
+                <element signature="e#5128#5129#0" expanded="true" />
+                <element signature="e#5147#5148#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -263,13 +290,13 @@
         <option value="$PROJECT_DIR$/src/main/fr/polytech/arcade/game/piece/Direction.java" />
         <option value="$PROJECT_DIR$/src/main/fr/polytech/arcade/game/ui/GridView.java" />
         <option value="$PROJECT_DIR$/src/main/fr/polytech/arcade/game/AbstractModel.java" />
-        <option value="$PROJECT_DIR$/src/main/fr/polytech/arcade/game/ui/GridHandler.java" />
         <option value="$PROJECT_DIR$/src/main/fr/polytech/arcade/game/piece/PieceBuilder.java" />
-        <option value="$PROJECT_DIR$/test/test/testarea/TestArea.java" />
-        <option value="$PROJECT_DIR$/src/main/fr/polytech/arcade/game/grid/GridController.java" />
-        <option value="$PROJECT_DIR$/src/main/fr/polytech/arcade/game/grid/Grid.java" />
         <option value="$PROJECT_DIR$/src/main/fr/polytech/arcade/game/piece/Piece.java" />
+        <option value="$PROJECT_DIR$/src/main/fr/polytech/arcade/game/ui/GridHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/fr/polytech/arcade/game/grid/GridController.java" />
         <option value="$PROJECT_DIR$/test/test/tetris/Tetris.java" />
+        <option value="$PROJECT_DIR$/test/test/testarea/TestArea.java" />
+        <option value="$PROJECT_DIR$/src/main/fr/polytech/arcade/game/grid/Grid.java" />
       </list>
     </option>
   </component>
@@ -309,8 +336,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -429,7 +456,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Tetris">
+  <component name="RunManager" selected="Application.TestArea">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -580,8 +607,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Application.Tetris" />
-        <item index="1" class="java.lang.String" itemvalue="Application.TestArea" />
+        <item index="0" class="java.lang.String" itemvalue="Application.TestArea" />
+        <item index="1" class="java.lang.String" itemvalue="Application.Tetris" />
         <item index="2" class="java.lang.String" itemvalue="JUnit.PieceTest" />
         <item index="3" class="java.lang.String" itemvalue="JUnit.PieceTest.test_PieceBuilder" />
         <item index="4" class="java.lang.String" itemvalue="JUnit.PieceTest.test_toString" />
@@ -610,7 +637,8 @@
       <workItem from="1521297761619" duration="2540000" />
       <workItem from="1521379075833" duration="8032000" />
       <workItem from="1521476077356" duration="856000" />
-      <workItem from="1521539314795" duration="4788000" />
+      <workItem from="1521539314795" duration="4789000" />
+      <workItem from="1521550729813" duration="5675000" />
     </task>
     <task id="LOCAL-00001" summary="4h Later...&#10;* Changed Grid/GridController/GridView to match the MVC&#10;* Updated Piece to be more functional (not tested)&#10;* Update Engine &amp; EngineListener&#10;* Added AbstractModel &amp; GameState">
       <created>1520348281553</created>
@@ -690,7 +718,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51506000" />
+    <option name="totallyTimeSpent" value="57182000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -706,7 +734,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3204105" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19280344" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19548872" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973147" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -852,14 +880,15 @@
         <state relative-caret-position="1134">
           <caret line="72" column="21" lean-forward="true" selection-start-line="72" selection-start-column="21" selection-end-line="72" selection-end-column="21" />
           <folding>
-            <element signature="e#3833#3834#0" expanded="true" />
-            <element signature="e#3855#3856#0" expanded="true" />
-            <element signature="e#3984#3985#0" expanded="true" />
-            <element signature="e#4006#4007#0" expanded="true" />
-            <element signature="e#4838#4839#0" expanded="true" />
-            <element signature="e#4858#4859#0" expanded="true" />
-            <element signature="e#4988#4989#0" expanded="true" />
-            <element signature="e#5007#5008#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#3973#3974#0" expanded="true" />
+            <element signature="e#3995#3996#0" expanded="true" />
+            <element signature="e#4124#4125#0" expanded="true" />
+            <element signature="e#4146#4147#0" expanded="true" />
+            <element signature="e#4978#4979#0" expanded="true" />
+            <element signature="e#4998#4999#0" expanded="true" />
+            <element signature="e#5128#5129#0" expanded="true" />
+            <element signature="e#5147#5148#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -929,14 +958,15 @@
         <state relative-caret-position="108">
           <caret line="6" column="29" lean-forward="false" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
           <folding>
-            <element signature="e#3833#3834#0" expanded="true" />
-            <element signature="e#3855#3856#0" expanded="true" />
-            <element signature="e#3984#3985#0" expanded="true" />
-            <element signature="e#4006#4007#0" expanded="true" />
-            <element signature="e#4838#4839#0" expanded="true" />
-            <element signature="e#4858#4859#0" expanded="true" />
-            <element signature="e#4988#4989#0" expanded="true" />
-            <element signature="e#5007#5008#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#3973#3974#0" expanded="true" />
+            <element signature="e#3995#3996#0" expanded="true" />
+            <element signature="e#4124#4125#0" expanded="true" />
+            <element signature="e#4146#4147#0" expanded="true" />
+            <element signature="e#4978#4979#0" expanded="true" />
+            <element signature="e#4998#4999#0" expanded="true" />
+            <element signature="e#5128#5129#0" expanded="true" />
+            <element signature="e#5147#5148#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1082,10 +1112,49 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/EnhancedList.jar!/fr/berger/enhancedlist/Couple.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/EnhancedList.jar!/fr/berger/enhancedlist/Point.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/javafx-src.zip!/javafx/animation/AnimationTimer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-491">
+          <caret line="47" column="23" lean-forward="true" selection-start-line="47" selection-start-column="23" selection-end-line="47" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/fr/polytech/arcade/game/piece/Piece.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1134">
+          <caret line="242" column="56" lean-forward="false" selection-start-line="242" selection-start-column="56" selection-end-line="242" selection-end-column="56" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3973#3974#0" expanded="true" />
+            <element signature="e#3995#3996#0" expanded="true" />
+            <element signature="e#4124#4125#0" expanded="true" />
+            <element signature="e#4146#4147#0" expanded="true" />
+            <element signature="e#4978#4979#0" expanded="true" />
+            <element signature="e#4998#4999#0" expanded="true" />
+            <element signature="e#5128#5129#0" expanded="true" />
+            <element signature="e#5147#5148#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/fr/polytech/arcade/game/ui/GridHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="37" lean-forward="false" selection-start-line="7" selection-start-column="37" selection-end-line="7" selection-end-column="37" />
+        <state relative-caret-position="168">
+          <caret line="8" column="69" lean-forward="false" selection-start-line="8" selection-start-column="69" selection-end-line="8" selection-end-column="69" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1094,7 +1163,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/fr/polytech/arcade/game/piece/PieceBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="819">
+        <state relative-caret-position="777">
           <caret line="210" column="33" lean-forward="false" selection-start-line="210" selection-start-column="33" selection-end-line="210" selection-end-column="33" />
           <folding>
             <element signature="e#402#403#0" expanded="true" />
@@ -1107,50 +1176,53 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/fr/polytech/arcade/game/grid/GridController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="90" column="0" lean-forward="false" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
+        <state relative-caret-position="567">
+          <caret line="47" column="68" lean-forward="false" selection-start-line="47" selection-start-column="68" selection-end-line="47" selection-end-column="68" />
           <folding>
-            <element signature="e#2004#2005#0" expanded="true" />
-            <element signature="e#2037#2038#0" expanded="true" />
-            <element signature="e#2089#2090#0" expanded="true" />
-            <element signature="e#2129#2130#0" expanded="true" />
-            <element signature="e#2156#2157#0" expanded="true" />
-            <element signature="e#2179#2180#0" expanded="true" />
-            <element signature="e#2211#2212#0" expanded="true" />
-            <element signature="e#2242#2243#0" expanded="true" />
-            <element signature="e#2323#2324#0" expanded="true" />
-            <element signature="e#2602#2603#0" expanded="true" />
-            <element signature="e#2620#2621#0" expanded="true" />
+            <element signature="e#2023#2024#0" expanded="true" />
+            <element signature="e#2056#2057#0" expanded="true" />
+            <element signature="e#2108#2109#0" expanded="true" />
+            <element signature="e#2148#2149#0" expanded="true" />
+            <element signature="e#2175#2176#0" expanded="true" />
+            <element signature="e#2198#2199#0" expanded="true" />
+            <element signature="e#2230#2231#0" expanded="true" />
+            <element signature="e#2261#2262#0" expanded="true" />
+            <element signature="e#2324#2325#0" expanded="true" />
+            <element signature="e#2342#2343#0" expanded="true" />
+            <element signature="e#2621#2622#0" expanded="true" />
+            <element signature="e#2639#2640#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/EnhancedList.jar!/fr/berger/enhancedlist/Couple.class">
+    <entry file="file://$PROJECT_DIR$/test/test/tetris/Tetris.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+        <state relative-caret-position="378">
+          <caret line="58" column="84" lean-forward="false" selection-start-line="58" selection-start-column="84" selection-end-line="58" selection-end-column="84" />
           <folding>
-            <element signature="e#458#459#0" expanded="true" />
-            <element signature="e#487#488#0" expanded="true" />
-            <element signature="e#516#517#0" expanded="true" />
-            <element signature="e#565#566#0" expanded="true" />
-            <element signature="e#594#595#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#5075#5076#0" expanded="true" />
+            <element signature="e#5094#5095#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/EnhancedList.jar!/fr/berger/enhancedlist/Point.class">
+    <entry file="file://$PROJECT_DIR$/test/test/testarea/TestArea.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="441">
+          <caret line="87" column="58" lean-forward="false" selection-start-line="87" selection-start-column="58" selection-end-line="87" selection-end-column="58" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4373#4374#0" expanded="true" />
+            <element signature="e#4392#4393#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/fr/polytech/arcade/game/grid/Grid.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="82" column="0" lean-forward="false" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+        <state relative-caret-position="441">
+          <caret line="329" column="42" lean-forward="false" selection-start-line="329" selection-start-column="42" selection-end-line="329" selection-end-column="42" />
           <folding>
             <element signature="e#1232#1233#0" expanded="true" />
             <element signature="e#1265#1266#0" expanded="true" />
@@ -1158,82 +1230,34 @@
             <element signature="e#1301#1302#0" expanded="true" />
             <element signature="e#1593#1594#0" expanded="true" />
             <element signature="e#1636#1637#0" expanded="true" />
-            <element signature="e#6919#6920#0" expanded="true" />
-            <element signature="e#6956#6957#0" expanded="true" />
-            <element signature="e#8516#8517#0" expanded="true" />
-            <element signature="e#8550#8551#0" expanded="true" />
-            <element signature="e#9742#9743#0" expanded="true" />
-            <element signature="e#9783#9784#0" expanded="true" />
-            <element signature="e#10406#10407#0" expanded="true" />
-            <element signature="e#10432#10433#0" expanded="true" />
-            <element signature="e#10486#10487#0" expanded="true" />
-            <element signature="e#10525#10526#0" expanded="true" />
-            <element signature="e#10683#10684#0" expanded="true" />
-            <element signature="e#10719#10720#0" expanded="true" />
-            <element signature="e#12027#12028#0" expanded="true" />
-            <element signature="e#12050#12051#0" expanded="true" />
-            <element signature="e#12077#12078#0" expanded="true" />
-            <element signature="e#12112#12113#0" expanded="true" />
-            <element signature="e#12140#12141#0" expanded="true" />
-            <element signature="e#12175#12176#0" expanded="true" />
-            <element signature="e#12654#12655#0" expanded="true" />
-            <element signature="e#12714#12715#0" expanded="true" />
-            <element signature="e#12753#12754#0" expanded="true" />
-            <element signature="e#12814#12815#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/fr/polytech/arcade/game/piece/Piece.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="3" column="32" lean-forward="true" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
-          <folding>
-            <element signature="e#3833#3834#0" expanded="true" />
-            <element signature="e#3855#3856#0" expanded="true" />
-            <element signature="e#3984#3985#0" expanded="true" />
-            <element signature="e#4006#4007#0" expanded="true" />
-            <element signature="e#4838#4839#0" expanded="true" />
-            <element signature="e#4858#4859#0" expanded="true" />
-            <element signature="e#4988#4989#0" expanded="true" />
-            <element signature="e#5007#5008#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/test/testarea/TestArea.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1701">
-          <caret line="128" column="42" lean-forward="false" selection-start-line="128" selection-start-column="42" selection-end-line="128" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4140#4141#0" expanded="true" />
-            <element signature="e#4159#4160#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/javafx-src.zip!/javafx/animation/AnimationTimer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-491">
-          <caret line="47" column="23" lean-forward="true" selection-start-line="47" selection-start-column="23" selection-end-line="47" selection-end-column="23" />
-          <folding>
-            <element signature="e#1734#1735#0" expanded="true" />
-            <element signature="e#1795#1796#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/test/tetris/Tetris.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-273">
-          <caret line="35" column="7" lean-forward="true" selection-start-line="35" selection-start-column="7" selection-end-line="35" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3525#3802#0" expanded="true" />
-            <element signature="e#3801#3802#0" expanded="true" />
-            <element signature="e#4941#4942#0" expanded="true" />
-            <element signature="e#4960#4961#0" expanded="true" />
+            <element signature="e#5248#5249#0" expanded="true" />
+            <element signature="e#5290#5291#0" expanded="true" />
+            <element signature="e#5788#5789#0" expanded="true" />
+            <element signature="e#5828#5829#0" expanded="true" />
+            <element signature="e#7352#7353#0" expanded="true" />
+            <element signature="e#7391#7392#0" expanded="true" />
+            <element signature="e#8281#8282#0" expanded="true" />
+            <element signature="e#8318#8319#0" expanded="true" />
+            <element signature="e#9878#9879#0" expanded="true" />
+            <element signature="e#9912#9913#0" expanded="true" />
+            <element signature="e#11104#11105#0" expanded="true" />
+            <element signature="e#11145#11146#0" expanded="true" />
+            <element signature="e#11768#11769#0" expanded="true" />
+            <element signature="e#11794#11795#0" expanded="true" />
+            <element signature="e#11848#11849#0" expanded="true" />
+            <element signature="e#11887#11888#0" expanded="true" />
+            <element signature="e#12045#12046#0" expanded="true" />
+            <element signature="e#12081#12082#0" expanded="true" />
+            <element signature="e#13389#13390#0" expanded="true" />
+            <element signature="e#13412#13413#0" expanded="true" />
+            <element signature="e#13439#13440#0" expanded="true" />
+            <element signature="e#13474#13475#0" expanded="true" />
+            <element signature="e#13502#13503#0" expanded="true" />
+            <element signature="e#13537#13538#0" expanded="true" />
+            <element signature="e#14016#14017#0" expanded="true" />
+            <element signature="e#14076#14077#0" expanded="true" />
+            <element signature="e#14115#14116#0" expanded="true" />
+            <element signature="e#14176#14177#0" expanded="true" />
           </folding>
         </state>
       </provider>

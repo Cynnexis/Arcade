@@ -1,5 +1,6 @@
 package test.tetris;
 
+import com.sun.xml.internal.ws.api.policy.ModelUnmarshaller;
 import fr.berger.enhancedlist.Point;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -8,6 +9,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -54,7 +56,7 @@ public class Tetris extends Application {
 		
 		g_controller.addGridHandler(new GridHandler() {
 			@Override
-			public void onTileClicked(int x, int y) {
+			public void onTileClicked(int x, int y, @NotNull MouseButton mouseButton) {
 				//System.out.print("Tetris.onTileClicked> (" + x + " ; " + y + ")");
 				
 				Piece clickedPiece = g_controller.getGrid().get(x, y);

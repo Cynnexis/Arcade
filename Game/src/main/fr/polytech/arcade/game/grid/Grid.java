@@ -177,6 +177,29 @@ public class Grid extends AbstractModel implements Observer {
 		
 		return result;
 	}
+	public boolean move(@NotNull Piece piece, int x, int y) {
+		return move(piece, new Point(x, y));
+	}
+	
+	/**
+	 * Move <c>piece</c> at the coordinates <c>destination</c> regardless of the grid
+	 * @param piece
+	 * @param destination
+	 */
+	public void forceMove(@NotNull Piece piece, @NotNull Point destination) {
+		if (piece == null || destination == null)
+			throw new NullPointerException();
+		
+		// Check if the piece is already in the list
+		if (getIdFromPiece(piece) == -1)
+			return;
+		
+		piece.setPosition(destination);
+		snap();
+	}
+	public void forceMove(@NotNull Piece piece, int x, int y) {
+		forceMove(piece, new Point(x, y));
+	}
 	
 	public boolean rotate(@NotNull Piece piece, int degreeClockwise) {
 		if (piece == null)
@@ -208,6 +231,39 @@ public class Grid extends AbstractModel implements Observer {
 			throw new ArrayIndexOutOfBoundsException();
 		
 		return rotate(getPieces().get(index), degreeClockwise);
+	}
+	
+	public boolean deleteAt(@NotNull Point point) {
+		if (point == null)
+			throw new NullPointerException();
+		
+		if (!checkIndexes(point))
+			return false;
+		
+		ArrayList<Piece> pieces = getAll(point);
+		
+		if (pieces.size() == 0)
+			return false;
+		
+		boolean hasDeleteAtLeastOneTile = false;
+		
+		for (Piece piece : pieces) {
+			int x = point.getX() - piece.getPosition().getX();
+			int y = point.getY() - piece.getPosition().getY();
+			
+			if (piece.getShape().get(x, y))
+				hasDeleteAtLeastOneTile = true;
+			
+			piece.getShape().set(x, y, false);
+		}
+		
+		if (hasDeleteAtLeastOneTile)
+			snap();
+		
+		return hasDeleteAtLeastOneTile;
+	}
+	public boolean deleteAt(int x, int y) {
+		return deleteAt(new Point(x, y));
 	}
 	
 	@NotNull

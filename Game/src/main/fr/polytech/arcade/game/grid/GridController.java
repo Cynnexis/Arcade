@@ -45,7 +45,7 @@ public class GridController implements Observer {
 				for (GridHandler gh : getGridHandlers()) {
 					if (gh != null) {
 						try {
-							gh.onTileClicked(x, y);
+							gh.onTileClicked(x, y, event.getButton());
 						} catch (Exception ex) {
 							ex.printStackTrace();
 						}

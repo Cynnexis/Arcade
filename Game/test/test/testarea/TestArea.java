@@ -5,6 +5,7 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -73,14 +74,19 @@ public class TestArea extends Application {
 		
 		g_controller.addGridHandler(new GridHandler() {
 			@Override
-			public void onTileClicked(int x, int y) {
+			public void onTileClicked(int x, int y, @NotNull MouseButton mouseButton) {
 				System.out.print("TestArea.onTileClicked> (" + x + " ; " + y + ")");
 				
-				Piece clickedPiece = g_controller.getGrid().get(x, y);
-				g_controller.getGrid().setFocusedPiece(clickedPiece);
-				
-				if (clickedPiece != null)
-					System.out.print(" piece :\n" + clickedPiece.toString());
+				if (mouseButton == MouseButton.PRIMARY) {
+					Piece clickedPiece = g_controller.getGrid().get(x, y);
+					g_controller.getGrid().setFocusedPiece(clickedPiece);
+					
+					if (clickedPiece != null)
+						System.out.print(" piece :\n" + clickedPiece.toString());
+				}
+				else if (mouseButton == MouseButton.SECONDARY) {
+					g_controller.getGrid().deleteAt(x, y);
+				}
 				
 				System.out.println();
 			}
