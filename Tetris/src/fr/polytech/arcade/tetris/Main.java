@@ -16,6 +16,8 @@ import main.fr.polytech.arcade.game.piece.PieceBuilder;
 import main.fr.polytech.arcade.game.ui.GridHandler;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 public class Main extends Application {
@@ -48,20 +50,29 @@ public class Main extends Application {
 	 */
 	@Override
 	public void start(@NotNull Stage primaryStage) throws Exception {
-		g_controller = new GridController();
+		g_controller = new GridController(10, 15);
 
 		g_controller.addGridHandler(new GridHandler() {
 			@Override
 			public void onTileClicked(int x, int y) {
-				//System.out.print("Tetris.onTileClicked> (" + x + " ; " + y + ")");
-
 				Piece clickedPiece = g_controller.getGrid().get(x, y);
-				g_controller.getGrid().setFocusedPiece(clickedPiece);
-
-				/*if (clickedPiece != null)
-					System.out.print(" piece :\n" + clickedPiece.toString());
-
-				System.out.println();*/
+				Piece focusedPiece = g_controller.getGrid().getFocusedPiece();
+				
+				if (focusedPiece != null) {
+					boolean tryToMovePiece = true;
+					
+					if (clickedPiece != null && Objects.equals(clickedPiece, focusedPiece)) {
+						g_controller.getGrid().rotate(clickedPiece, 90);
+						tryToMovePiece = false;
+					}
+					
+					if (tryToMovePiece) {
+						if (x < focusedPiece.getPosition().getX())
+							g_controller.getGrid().move(focusedPiece, new Point(focusedPiece.getPosition().getX() - 1, focusedPiece.getPosition().getY()));
+						else if (x > focusedPiece.getPosition().getX())
+							g_controller.getGrid().move(focusedPiece, new Point(focusedPiece.getPosition().getX() + 1, focusedPiece.getPosition().getY()));
+					}
+				}
 			}
 
 			@Override
@@ -71,9 +82,6 @@ public class Main extends Application {
 				if (piece != null) {
 					switch (code)
 					{
-						/*case Z:
-							g_controller.getGrid().move(piece, new Point(piece.getPosition().getX(), piece.getPosition().getY() - 1));
-							break;*/
 						case Q:
 							g_controller.getGrid().move(piece, new Point(piece.getPosition().getX() - 1, piece.getPosition().getY()));
 							break;
@@ -107,8 +115,14 @@ public class Main extends Application {
 			@Override
 			public void handle(long nowNano) {
 				if (continueGravity && nowNano - lastUpdateNano >= 1000000000) {
+					// Simulate gravity
 					boolean result = gravity();
-
+					
+					// Check if row can be deleted
+					if (rowsToDelete().size() > 0)
+						System.out.println("Tetris> Rows to delete: " + rowsToDelete().toString());
+					
+					// Generate new piece
 					if (result == false)
 						generate();
 
@@ -120,6 +134,8 @@ public class Main extends Application {
 		primaryStage.setTitle("Tetris");
 		primaryStage.setScene(scene);
 		primaryStage.show();
+		
+		g_controller.requestFocus();
 	}
 
 	/**
@@ -152,6 +168,49 @@ public class Main extends Application {
 		}
 
 		g_controller.getGrid().setFocusedPiece(g_controller.getGrid().getPieces().size() - 1);
+	}
+	
+	/**
+	 * Search all filled rows in the grid.
+	 * @return Return a list of row indexes that must be deleted.
+	 */
+	@NotNull
+	private ArrayList<Integer> rowsToDelete() {
+		ArrayList<Integer> rows = new ArrayList<>();
+		
+		if (g_controller != null) {
+			
+			/**
+			 * Tell if a non-filled row has been found
+			 */
+			boolean nonFilledRow = false;
+			
+			/**
+			 * Tell if the current row contains only filled tiles
+			 */
+			boolean currentRowComplete = true;
+			
+			// For every row in the grid (starting from the end)...
+			for (int y = g_controller.getGrid().getHeight() - 1; y >= 0 && !nonFilledRow; y--) {
+				
+				currentRowComplete = true;
+				
+				// For every column in the row number 'y' and while currentRowComplete is true...
+				for (int x = 0; x < g_controller.getGrid().getWidth() && currentRowComplete; x++) {
+					// If the current tile (x ; y) is not filled, then the row cannot be deleted.
+					if (g_controller.getGrid().get(x, y) == null)
+						currentRowComplete = false;
+				}
+				
+				// If all the tile in the current row are filled, add the current to the list
+				if (currentRowComplete)
+					rows.add(y);
+				else
+					nonFilledRow = true;
+			}
+		}
+		
+		return rows;
 	}
 
 	@Override

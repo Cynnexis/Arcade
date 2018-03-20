@@ -4,6 +4,9 @@
       <root url="jar://$PROJECT_DIR$/lib/Game.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../Game/src" />
+      <root url="file://$PROJECT_DIR$/../Game/test" />
+    </SOURCES>
   </library>
 </component>

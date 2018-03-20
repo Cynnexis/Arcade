@@ -42,24 +42,47 @@ public class GridController implements Observer {
 				
 				//System.out.println("[" + x + " ; " + y + "]");
 				
-				for (GridHandler gh : getGridHandlers())
-					gh.onTileClicked(x, y);
+				for (GridHandler gh : getGridHandlers()) {
+					if (gh != null) {
+						try {
+							gh.onTileClicked(x, y);
+						} catch (Exception ex) {
+							ex.printStackTrace();
+						}
+					}
+				}
 			}
 		});
 		
 		getView().setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent event) {
-				for (GridHandler gh : getGridHandlers())
-					gh.onKeyPressed(event.getCode());
+				for (GridHandler gh : getGridHandlers()) {
+					if (gh != null) {
+						try {
+							gh.onKeyPressed(event.getCode());
+						} catch (Exception ex) {
+							ex.printStackTrace();
+						}
+					}
+				}
 			}
 		});
+		
+		getView().requestFocus();
 	}
 	public GridController(@NotNull Grid grid) {
 		this(grid, new GridView());
 	}
+	public GridController(int nbColumns, int nbRows) {
+		this(new Grid(nbColumns, nbRows));
+	}
 	public GridController() {
 		this(new Grid());
+	}
+	
+	public void requestFocus() {
+		getView().requestFocus();
 	}
 	
 	/* GETTERS & SETTERS */

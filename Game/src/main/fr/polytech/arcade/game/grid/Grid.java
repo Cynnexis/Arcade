@@ -83,8 +83,12 @@ public class Grid extends AbstractModel implements Observer {
 		for (int i = destination.getX(); i < destination.getX() + piece.getShape().getNbColumns(); i++) {
 			for (int j = destination.getY(); j < destination.getY() + piece.getShape().getNbRows(); j++) {
 				
-				//Piece currentPiece = get(i, j);
-				ArrayList<Piece> currentPieces = getAll(i, j);
+				ArrayList<Piece> currentPieces;
+				try {
+					currentPieces = getAll(i, j);
+				} catch (ArrayIndexOutOfBoundsException ignored) {
+					return false;
+				}
 				for (Piece currentPiece : currentPieces) {
 					if (currentPiece != null && !Objects.equals(currentPiece, piece)) {
 						Shape sh = currentPiece.getShape();

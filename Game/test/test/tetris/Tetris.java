@@ -122,6 +122,8 @@ public class Tetris extends Application {
 		primaryStage.setTitle("Tetris");
 		primaryStage.setScene(scene);
 		primaryStage.show();
+		
+		g_controller.requestFocus();
 	}
 	
 	/**

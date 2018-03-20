@@ -4,11 +4,15 @@ import fr.berger.enhancedlist.Point;
 import javafx.scene.paint.Color;
 import main.fr.polytech.arcade.game.AbstractModel;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
+import java.util.UUID;
 
 public class Piece extends AbstractModel {
 	
+	@NotNull
+	private UUID id;
 	private boolean isPlaced;
 	@NotNull
 	private Point position;
@@ -22,6 +26,7 @@ public class Piece extends AbstractModel {
 	/* CONSTRUCTORS */
 	
 	public Piece(boolean isPlaced, @NotNull Point position, @NotNull Shape shape, @NotNull Point centre, @NotNull Color color) {
+		setId(UUID.randomUUID());
 		setPlaced(isPlaced);
 		setPosition(position);
 		setShape(shape);
@@ -130,6 +135,21 @@ public class Piece extends AbstractModel {
 	}
 	
 	/* GETTERS & SETTERS */
+	
+	@Nullable
+	public UUID getId() {
+		if (this.id == null)
+			this.id = UUID.randomUUID();
+		
+		return id;
+	}
+	
+	public void setId(@Nullable UUID id) {
+		if (id == null)
+			this.id = UUID.randomUUID();
+		else
+			this.id = id;
+	}
 	
 	public boolean isPlaced() {
 		return isPlaced;
@@ -240,15 +260,18 @@ public class Piece extends AbstractModel {
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (!(o instanceof Piece)) return false;
-		
 		Piece piece = (Piece) o;
 		return isPlaced() == piece.isPlaced() &&
+				Objects.equals(getId(), piece.getId()) &&
+				Objects.equals(getPosition(), piece.getPosition()) &&
 				Objects.equals(getShape(), piece.getShape()) &&
-				Objects.equals(getCentre(), piece.getCentre());
+				Objects.equals(getCentre(), piece.getCentre()) &&
+				Objects.equals(getColor(), piece.getColor());
 	}
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(isPlaced(), getShape(), getCentre());
+		
+		return Objects.hash(getId(), isPlaced(), getPosition(), getShape(), getCentre(), getColor());
 	}
 }
