@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="annotations-java8">
+  <library name="Game">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/annotations-java8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/Game.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

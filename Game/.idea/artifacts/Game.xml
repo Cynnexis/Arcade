@@ -1,19 +1,12 @@
 <component name="ArtifactManager">
-  <artifact type="javafx" name="Game">
+  <artifact type="jar" name="Game">
     <output-path>$PROJECT_DIR$/out/artifacts/Game</output-path>
-    <properties id="javafx-properties">
-      <options>
-        <option name="appClass" value="" />
-        <option name="description" value="" />
-        <option name="htmlPlaceholderId" value="" />
-        <option name="title" value="Game" />
-        <option name="vendor" value="Polytech Corporation" />
-        <option name="version" value="" />
-      </options>
-    </properties>
-    <root id="root">
-      <element id="archive" name="Game.jar">
-        <element id="module-output" name="Game" />
+    <root id="archive" name="Game.jar">
+      <element id="module-output" name="Game" />
+      <element id="library" level="project" name="JetBrains Annotations" />
+      <element id="library" level="project" name="EnhancedList" />
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
       </element>
     </root>
   </artifact>
