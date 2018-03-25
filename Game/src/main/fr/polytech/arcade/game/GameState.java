@@ -7,9 +7,9 @@ public enum GameState {
 	PLAYING,
 	PAUSE,
 	STOP,
-	GAMEOVER,
 	WIN,
-	LOST;
+	GAMEOVER,
+	DRAW;
 	
 	public static boolean isGameContinuing(@NotNull GameState state) {
 		if (state == null)

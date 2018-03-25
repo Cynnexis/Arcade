@@ -8,6 +8,7 @@ import main.fr.polytech.arcade.game.piece.Piece;
 import java.util.ArrayList;
 
 @SuppressWarnings("NullableProblems")
+@Deprecated
 public class Engine {
 	
 	@Nullable

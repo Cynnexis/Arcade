@@ -3,12 +3,19 @@ package fr.polytech.arcade.tetris;
 import fr.berger.enhancedlist.Point;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import main.fr.polytech.arcade.game.GameState;
 import main.fr.polytech.arcade.game.grid.GridController;
 import main.fr.polytech.arcade.game.piece.Piece;
 import main.fr.polytech.arcade.game.piece.PieceBuilder;
@@ -19,12 +26,19 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
 
+// https://www.youtube.com/watch?v=HI0rlp7tiZ0&t=17s
+
 public class Main extends Application {
 
 	private GridController g_controller;
+	private AnimationTimer aTimer;
+	private Button b_play;
+	private Button b_exit;
+	
+	private GameState state;
+	private int score;
 
 	private long lastUpdateNano = 0;
-	private boolean continueGravity = true;
 
 	/**
 	 * buffer fot the next piece
@@ -50,6 +64,8 @@ public class Main extends Application {
 	@Override
 	public void start(@NotNull Stage primaryStage) throws Exception {
 		g_controller = new GridController(10, 15);
+		b_play = new Button("Play");
+		b_exit = new Button("Exit");
 
 		g_controller.addGridHandler(new GridHandler() {
 			@Override
@@ -76,46 +92,67 @@ public class Main extends Application {
 
 			@Override
 			public void onKeyPressed(@NotNull KeyCode code) {
-				Piece piece = g_controller.getGrid().getFocusedPiece();
-
-				if (piece != null) {
-					switch (code)
-					{
-						case Q:
-							g_controller.getGrid().move(piece, new Point(piece.getPosition().getX() - 1, piece.getPosition().getY()));
-							break;
-						case S:
-							g_controller.getGrid().move(piece, new Point(piece.getPosition().getX(), piece.getPosition().getY() + 1));
-							break;
-						case D:
-							g_controller.getGrid().move(piece, new Point(piece.getPosition().getX() + 1, piece.getPosition().getY()));
-							break;
-						case SPACE:
-						case R:
-							g_controller.getGrid().rotate(piece, 90);
-							break;
+				if (state == GameState.PLAYING) {
+					Piece piece = g_controller.getGrid().getFocusedPiece();
+					
+					if (piece != null) {
+						switch (code) {
+							case Q:
+								g_controller.getGrid().move(piece, new Point(piece.getPosition().getX() - 1, piece.getPosition().getY()));
+								break;
+							case S:
+								// Force gravity() through aTimer
+								lastUpdateNano = 0;
+								break;
+							case D:
+								g_controller.getGrid().move(piece, new Point(piece.getPosition().getX() + 1, piece.getPosition().getY()));
+								break;
+							case SPACE:
+							case R:
+								g_controller.getGrid().rotate(piece, 90);
+								break;
+						}
 					}
 				}
 			}
 		});
+		g_controller.getView().setLineStroke(0.0);
 		g_controller.update();
-
-		for (int i = 0; i < g_controller.getGrid().getPieces().size(); i++)
-			System.out.println("Tetris.start> piece n°" + i + ":\n" + g_controller.getGrid().getPieces().get(i).toString());
+		
+		b_play.setPadding(new Insets(5.0));
+		b_play.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				newGame();
+			}
+		});
+		
+		b_exit.setPadding(new Insets(5.0));
+		b_exit.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				primaryStage.close();
+			}
+		});
 
 		BorderPane bp_main = new BorderPane();
-
+		
+		bp_main.setPadding(new Insets(10.0));
+		bp_main.setTop(new HBox(b_play, b_exit));
 		bp_main.setCenter(g_controller.getView());
-		bp_main.setTop(new Text("Test"));
+		bp_main.setBottom(new Text("Score: " + score));
 
 		Scene scene = new Scene(bp_main);
-
-		new AnimationTimer() {
+		
+		aTimer = new AnimationTimer() {
 			@Override
 			public void handle(long nowNano) {
-				if (continueGravity && nowNano - lastUpdateNano >= 1000000000) {
+				if (state == GameState.PLAYING && nowNano - lastUpdateNano >= 1000000000) {
 					// Simulate gravity
 					boolean result = gravity();
+					
+					if (result)
+						score += 5;
 					
 					// Check if row can be deleted
 					if (rowsToDelete().size() > 0)
@@ -127,15 +164,28 @@ public class Main extends Application {
 						generate();
 
 					lastUpdateNano = nowNano;
+					
 				}
+				
+				bp_main.setBottom(new Text("Score: " + score + (state == GameState.GAMEOVER ? " | Game Over!" : "")));
 			}
-		}.start();
+		};
 
 		primaryStage.setTitle("Tetris");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
+		newGame();
+	}
+	
+	private void newGame() throws NullPointerException {
+		state = GameState.INITIALIZING;
+		score = 0;
+		aTimer.start();
+		g_controller.getGrid().getPieces().clear();
 		g_controller.requestFocus();
+		state = GameState.PLAYING;
+		lastUpdateNano = 0;
 	}
 
 	/**
@@ -157,17 +207,20 @@ public class Main extends Application {
 		if (random == null)
 			random = new Random();
 
+		boolean result;
+		
 		// If it is the first time that this method is called
 		if (buffer == null) {
-			g_controller.getGrid().add(PieceBuilder.randomTemplate());
+			result = g_controller.getGrid().add(PieceBuilder.randomTemplate());
 			buffer = PieceBuilder.randomTemplate();
 		}
 		else {
-			g_controller.getGrid().add(buffer);
+			result = g_controller.getGrid().add(buffer);
 			buffer = PieceBuilder.randomTemplate();
 		}
-
-		g_controller.getGrid().setFocusedPiece(g_controller.getGrid().getPieces().size() - 1);
+		
+		if (!result)
+			state = GameState.GAMEOVER;
 	}
 	
 	private boolean deleteLastFilledRows() {
@@ -178,10 +231,14 @@ public class Main extends Application {
 		
 		boolean hasDeletedAtLeastOneRow = false;
 		
-		for (Integer y : rows)
-			for (int x = 0; x < g_controller.getGrid().getWidth(); x++)
-				if (g_controller.getGrid().deleteAt(x, y))
+		for (Integer y : rows) {
+			for (int x = 0; x < g_controller.getGrid().getWidth(); x++) {
+				if (g_controller.getGrid().deleteAt(x, y)) {
+					score += 100;
 					hasDeletedAtLeastOneRow = true;
+				}
+			}
+		}
 		
 		// If at least one row has been deleted, shift all pieces to the bottom
 		for (Piece piece : g_controller.getGrid().getPieces()) {
@@ -247,7 +304,7 @@ public class Main extends Application {
 	@Override
 	public void stop() throws Exception {
 		super.stop();
-		continueGravity = false;
+		state = GameState.STOP;
 	}
     
     public static void main(String[] args) {

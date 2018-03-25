@@ -35,7 +35,7 @@ public class GeneratePiece {
 		
 		return new PieceBuilder()
 				.setShape(sh)
-				.setColor(availableColors().get(getRandom().nextInt(availableColors().size())))
+				.setColor(generateRandomBrightColors().get(getRandom().nextInt(availableColors().size())))
 				.setPosition(position)
 				.createPiece();
 	}
@@ -68,11 +68,8 @@ public class GeneratePiece {
 		}
 		
 		return new PieceBuilder()
-				.setShape(new int[][] {
-						{1},
-						{1}
-				})
-				.setColor(availableColors().get(getRandom().nextInt(availableColors().size())))
+				.setShape(sh)
+				.setColor(generateRandomBrightColors().get(getRandom().nextInt(availableColors().size())))
 				.setPosition(position)
 				.createPiece();
 	}
@@ -97,22 +94,38 @@ public class GeneratePiece {
 	public static ArrayList<Color> availableColors() {
 		ArrayList<Color> colors = new ArrayList<>();
 		
-		colors.add(Color.rgb(138, 47, 98));
-		colors.add(Color.rgb(72, 47, 117));
-		colors.add(Color.rgb(36, 106, 101));
-		colors.add(Color.rgb(42, 125, 73));
-		colors.add(Color.rgb(98, 153, 52));
-		colors.add(Color.rgb(172, 172, 59));
-		colors.add(Color.rgb(172, 134, 59));
-		colors.add(Color.rgb(172, 110, 59));
-		colors.add(Color.rgb(172, 62, 59));
+		colors.add(Color.rgb(138, 0, 73));
+		colors.add(Color.rgb(148, 48, 214));
+		colors.add(Color.rgb(34, 161, 114));
+		colors.add(Color.rgb(41, 226, 69));
+		colors.add(Color.rgb(165, 249, 26));
+		colors.add(Color.rgb(243, 243, 44));
+		colors.add(Color.rgb(255, 158, 13));
 		
 		return colors;
 	}
 	
+	public static ArrayList<Color> generateRandomBrightColors(int number) {
+		ArrayList<Color> colors = new ArrayList<>(number);
+		
+		for (int i = 0; i < number; i++) {
+			int r = getRandom().nextInt(255);
+			int g = getRandom().nextInt(255);
+			int b = getRandom().nextInt(255);
+			
+			colors.add(Color.rgb(r, g, b).brighter());
+		}
+		
+		return colors;
+	}
+	public static ArrayList<Color> generateRandomBrightColors() {
+		return generateRandomBrightColors(50);
+	}
+	
 	@NotNull
 	public static Color getPrimaryColor() {
-		return Color.rgb(221, 240, 240);
+		//return Color.rgb(255, 58, 30);
+		return Color.BLACK;
 	}
 	
 	public static boolean isHorizontal(@NotNull Piece piece) {

@@ -273,7 +273,6 @@ public class Piece extends AbstractModel {
 	
 	@Override
 	public int hashCode() {
-		
 		return Objects.hash(getId(), isPlaced(), getPosition(), getShape(), getCentre(), getColor());
 	}
 }
