@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="Tetris.jnlp">
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="RushHour.jnlp">
   <information>
-    <title>Tetris</title>
-    <vendor>Polytech Corporation</vendor>
-    <description>Tetris</description>
+    <title>Rush Hour</title>
+    <vendor>Unknown</vendor>
+    <description>RushHour</description>
     <offline-allowed/>
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
     <jar href="EnhancedList.jar" size="26740" download="eager" />
     <jar href="Game.jar" size="54080" download="eager" />
-    <jar href="Tetris.jar" size="10694" download="eager" />
+    <jar href="RushHour.jar" size="11762" download="eager" />
     <jar href="annotations-java8.jar" size="25244" download="eager" />
   </resources>
-  <jfx:javafx-desc  width="600" height="400" main-class="fr.polytech.arcade.tetris.Main"  name="Tetris" />
+  <jfx:javafx-desc  width="600" height="400" main-class="fr.polytech.arcade.rushhour.Main"  name="RushHour" />
   <update check="background"/>
 </jnlp>

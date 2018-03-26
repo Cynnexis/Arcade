@@ -7,36 +7,81 @@ import javafx.scene.paint.Color;
 
 import java.util.Random;
 
+/**
+ * Builder for <c>Piece</c>
+ * @author Valentin Berger
+ * @see Piece
+ * @see Shape
+ */
 public class PieceBuilder {
 	
+	/**
+	 * The piece to build
+	 */
 	@NotNull
 	private Piece piece;
 	
+	/**
+	 * Constructor of PieceBuilder.
+	 * @param piece The instance of piece to start with.
+	 */
 	public PieceBuilder(@NotNull Piece piece) {
 		if (piece != null)
 			this.piece = piece;
 	}
+	
+	/**
+	 * Default constructor for PieceBuilder. Instantiate automatically a new piece.
+	 */
 	public PieceBuilder() {
 		this(new Piece());
 	}
 	
+	/**
+	 * Set if the piece must be placed or a "ghost"
+	 * @param isPlaced
+	 * @return Return this instance of PieceBuilder with the new modification(s).
+	 */
 	public PieceBuilder setIsPlaced(boolean isPlaced) {
 		piece.setPlaced(isPlaced);
 		return this;
 	}
 	
+	/**
+	 * Set the position of the piece
+	 * @param position
+	 * @return Return this instance of PieceBuilder with the new modification(s).
+	 */
 	public PieceBuilder setPosition(@NotNull Point position) {
 		piece.setPosition(position);
 		return this;
 	}
+	
+	/**
+	 * Set the position of the piece
+	 * @param x
+	 * @param y
+	 * @return Return this instance of PieceBuilder with the new modification(s).
+	 */
 	public PieceBuilder setPosition(int x, int y) {
 		return setPosition(new Point(x, y));
 	}
 	
+	/**
+	 * Set the shape of the piece
+	 * @param shape
+	 * @return Return this instance of PieceBuilder with the new modification(s).
+	 */
 	public PieceBuilder setShape(@NotNull Shape shape) {
 		piece.setShape(shape);
 		return this;
 	}
+	
+	/**
+	 * Set the shape of the piece
+	 * @param shape
+	 * @return Return this instance of PieceBuilder with the new modification(s).
+	 */
 	public PieceBuilder setShape(@NotNull boolean[][] shape) {
 		// Check if argument is null
 		if (shape == null)
@@ -68,6 +113,12 @@ public class PieceBuilder {
 		
 		return this;
 	}
+	
+	/**
+	 * Set the shape of the piece
+	 * @param shape
+	 * @return Return this instance of PieceBuilder with the new modification(s).
+	 */
 	public PieceBuilder setShape(@NotNull int[][] shape) {
 		// Check if argument is null
 		if (shape == null)
@@ -86,20 +137,41 @@ public class PieceBuilder {
 		return setShape(s);
 	}
 	
+	/**
+	 * Set the center of the piece. If not set, the center is automatically updated from the shape.
+	 * @param center
+	 * @return Return this instance of PieceBuilder with the new modification(s).
+	 */
 	public PieceBuilder setCenter(@NotNull Point center) {
 		piece.setCentre(center);
 		return this;
 	}
+	
+	/**
+	 * Set the center of the piece. If not set, the center is automatically updated from the shape.
+	 * @param x
+	 * @param y
+	 * @return Return this instance of PieceBuilder with the new modification(s).
+	 */
 	public PieceBuilder setCenter(int x, int y) {
 		piece.setCentre(new Point(x, y));
 		return this;
 	}
 	
+	/**
+	 * Set the color of the piece
+	 * @param color
+	 * @return Return this instance of PieceBuilder with the new modification(s).
+	 */
 	public PieceBuilder setColor(@NotNull Color color) {
 		piece.setColor(color);
 		return this;
 	}
 	
+	/**
+	 * Create the piece according to the parameters entered beforehand
+	 * @return This instance of the piece
+	 */
 	public @NotNull Piece createPiece() {
 		if (piece == null)
 			piece = new Piece();
@@ -110,6 +182,11 @@ public class PieceBuilder {
 	
 	/* TEMPLATES */
 	
+	/**
+	 * Pick a random piece from the templates
+	 * @param rand The random generator instance (not required)
+	 * @return An instance of a piece
+	 */
 	public static  @NotNull Piece randomTemplate(@Nullable Random rand) {
 		if (rand == null)
 			rand = new Random();

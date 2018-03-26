@@ -6,27 +6,65 @@ import main.fr.polytech.arcade.game.AbstractModel;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
-public class Piece extends AbstractModel {
+/**
+ * Model of a Piece. It inherits from the Observable model, even if it does not have a controller nor a view (a piece
+ * is managed by a <c>Grid</c> which respect the MVC model).
+ * @see main.fr.polytech.arcade.game.grid.Grid
+ * @see main.fr.polytech.arcade.game.grid.GridController
+ * @see java.util.Observable
+ * @see Shape
+ * @see PieceBuilder
+ */
+public class Piece extends AbstractModel implements Serializable, Cloneable {
 	
 	/**
 	 * The id of a piece is represented by UUID
 	 */
 	private String id;
+	
+	/**
+	 * Indicate if the piece is placed in the grid or if it is a "ghost"
+	 */
 	private boolean isPlaced;
+	
+	/**
+	 * The current position in the grid of the piece
+	 */
 	@NotNull
 	private Point position;
+	
+	/**
+	 * The shape of the piece (a matrix of boolean values)
+	 */
 	@NotNull
 	private Shape shape;
+	
+	/**
+	 * The gravity center of the piece (used for the rotation)
+	 */
 	@NotNull
 	private Point centre;
+	
+	/**
+	 * The color of the piece
+	 */
 	@NotNull
 	private Color color;
 	
 	/* CONSTRUCTORS */
 	
+	/**
+	 * Constructor for Piece.
+	 * @param isPlaced
+	 * @param position
+	 * @param shape
+	 * @param centre
+	 * @param color
+	 */
 	public Piece(boolean isPlaced, @NotNull Point position, @NotNull Shape shape, @NotNull Point centre, @NotNull Color color) {
 		setId(UUID.randomUUID().toString());
 		setPlaced(isPlaced);
@@ -35,29 +73,78 @@ public class Piece extends AbstractModel {
 		setCentre(centre);
 		setColor(color);
 	}
+	
+	/**
+	 * Constructor for Piece. The gravity center is automatically computed.
+	 * @param isPlaced
+	 * @param position
+	 * @param shape
+	 * @param color
+	 */
 	public Piece(boolean isPlaced, @NotNull Point position, @NotNull Shape shape, @NotNull Color color) {
 		this(isPlaced, position, shape, new Point(0, 0), color);
 		updateCenter();
 	}
+	
+	/**
+	 * Constructor for Piece. The gravity center is automatically computed and the piece is placed in the grid.
+	 * @param position
+	 * @param shape
+	 * @param color
+	 */
 	public Piece(@NotNull Point position, @NotNull Shape shape, @NotNull Color color) {
 		this(true, position, shape, color);
 	}
+	
+	/**
+	 * Constructor for Piece. The gravity center is automatically computed, the piece is placed in the grid and its
+	 * color is black.
+	 * @param position
+	 * @param shape
+	 */
 	public Piece(@NotNull Point position, @NotNull Shape shape) {
 		this(position, shape, Color.BLACK);
 	}
+	
+	/**
+	 * Constructor for Piece. The gravity center is automatically computed, the piece is placed in the grid, its color
+	 * is black and it has no shape (empty matrix).
+	 * @param position
+	 */
 	public Piece(@NotNull Point position) {
 		this(position, new Shape());
 	}
+	
+	/**
+	 * Constructor for Piece. The gravity center is automatically computed, the piece is placed in the grid, its color
+	 * is black and it is at (0 ; 0).
+	 * @param shape
+	 */
 	public Piece(@NotNull Shape shape) {
 		this(new Point(0, 0), shape);
 	}
+	
+	/**
+	 * Copy constructor
+	 * @param copy The piece to copy the properties
+	 */
 	public Piece(@NotNull Piece copy) {
 		this(copy.isPlaced(), copy.getPosition(), copy.getShape(), copy.getCentre(), copy.getColor());
 	}
+	
+	/**
+	 * The default constructor. The gravity center is automatically computed, the piece is placed in the grid, its color
+	 * is black, it is at (0 ; 0) and it has no shape (empty matrix).
+	 */
 	public Piece() {
 		this(new Shape());
 	}
 	
+	/**
+	 * Rotate the piece regardless of the grid.
+	 * @param degreeClockwise Accepted value: 0, 90, 180, 270
+	 * @return Return the instance of the rotated piece
+	 */
 	public @NotNull Piece rotate(int degreeClockwise) {
 		switch (degreeClockwise)
 		{
@@ -80,6 +167,10 @@ public class Piece extends AbstractModel {
 		return this;
 	}
 	
+	/**
+	 * Rotate the piece 90° clockwise
+	 * @return Return the instance of the rotated piece.
+	 */
 	public @NotNull Piece rotateClockwise90() {
 		Shape rotated = new Shape(getShape().getNbRows(), getShape().getNbColumns());
 		
@@ -110,6 +201,11 @@ public class Piece extends AbstractModel {
 		return this;
 	}
 	
+	/**
+	 * Invert the piece
+	 * @param axis The axis of inversion
+	 * @return Return the instance of the inverted piece
+	 */
 	public @NotNull Piece invert(@NotNull Axis axis) {
 		Shape inverted = new Shape(getShape().getNbColumns(), getShape().getNbRows());
 		

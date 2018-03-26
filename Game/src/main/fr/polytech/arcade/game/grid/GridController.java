@@ -16,17 +16,40 @@ import java.util.Objects;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * The controller of Grid. It implements the Observer pattern to receive the update from its models, and then notify
+ * its view.
+ * @author Valentin Berger
+ * @see Observer
+ * @see Grid
+ * @see GridView
+ */
 @SuppressWarnings("NullableProblems")
 public class GridController implements Observer {
 	
+	/**
+	 * The model
+	 */
 	@NotNull
 	private Grid grid;
+	
+	/**
+	 * The view of the grid
+	 */
 	@NotNull
 	private GridView view;
 	
+	/**
+	 * The list of the grid handlers (event handlers)
+	 */
 	@NotNull
 	private ArrayList<GridHandler> gridHandlers;
 	
+	/**
+	 * Constructor for GridController
+	 * @param grid The instance of the model
+	 * @param view The instance of the view
+	 */
 	public GridController(@NotNull Grid grid, @NotNull GridView view) {
 		setGrid(grid);
 		setView(view);
@@ -71,16 +94,34 @@ public class GridController implements Observer {
 		
 		getView().requestFocus();
 	}
+	
+	/**
+	 * Constructor for GridController. The instance of the view is automatically created
+	 * @param grid The instance of the model
+	 */
 	public GridController(@NotNull Grid grid) {
 		this(grid, new GridView());
 	}
+	
+	/**
+	 * Constructor for GridController. The instance of the view is automatically created
+	 * @param nbColumns The number of columns for the model
+	 * @param nbRows The number of rows for the model
+	 */
 	public GridController(int nbColumns, int nbRows) {
 		this(new Grid(nbColumns, nbRows));
 	}
+	
+	/**
+	 * Default constructor for GridController. The instances of the model and the view are automatically created
+	 */
 	public GridController() {
 		this(new Grid());
 	}
 	
+	/**
+	 * Put the focus of the view
+	 */
 	public void requestFocus() {
 		getView().requestFocus();
 	}

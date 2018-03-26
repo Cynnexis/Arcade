@@ -7,13 +7,24 @@ import main.fr.polytech.arcade.game.piece.Shape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Observable;
 import java.util.Observer;
 
-public class Grid extends AbstractModel implements Observer {
+/**
+ * Model for a grid, containing a matrix of m*n squares and pieces. It inherits from the Observable pattern for the
+ * MVC model, and also implement the Observer pattern to be notified from its pieces (which also inherit from
+ * Observable)
+ * @author Valentin Berger
+ * @see java.util.Observable
+ * @see AbstractModel
+ * @see GridController
+ * @see main.fr.polytech.arcade.game.ui.GridView
+ */
+public class Grid extends AbstractModel implements Observer, Serializable, Cloneable {
 	
 	/**
 	 * The ArrayList which contains all the piece.
@@ -35,17 +46,36 @@ public class Grid extends AbstractModel implements Observer {
 	@NotNull
 	private Point dimension;
 	
+	/**
+	 * Constructor of Grid
+	 * @param nbColumns Number of columns for the grid
+	 * @param nbRows Number of rows for the grid
+	 */
 	public Grid(int nbColumns, int nbRows) {
 		setDimension(nbColumns, nbRows);
 		pieces = new ArrayList<>(10);
 	}
+	
+	/**
+	 * Constructor of Grid
+	 * @param dimension The dimension n*n of the grid
+	 */
 	public Grid(int dimension) {
 		this(dimension, dimension);
 	}
+	
+	/**
+	 * Default constructor for Grid. Create a grid of 10*10 squares.
+	 */
 	public Grid() {
 		this(10, 10);
 	}
 	
+	/**
+	 * Check if the indexes are valid
+	 * @param indexes The indexes (x ; y) to check
+	 * @return Return <c>true</c> if indexes are valid, false otherwise
+	 */
 	public boolean checkIndexes(@NotNull Point indexes) {
 		if (indexes == null)
 			throw new NullPointerException();
@@ -53,6 +83,13 @@ public class Grid extends AbstractModel implements Observer {
 		return (indexes.getX() >= 0 && indexes.getX() < getWidth()) &&
 				(indexes.getY() >= 0 && indexes.getY() < getHeight());
 	}
+	
+	/**
+	 * Check if the indexes are valid
+	 * @param x The index <c>x</c> (columns)
+	 * @param y The index <c>y</c> (rows)
+	 * @return Return <c>true</c> if indexes are valid, false otherwise
+	 */
 	public boolean checkIndexes(int x, int y) {
 		return checkIndexes(new Point(x, y));
 	}
@@ -73,6 +110,12 @@ public class Grid extends AbstractModel implements Observer {
 		return -1;
 	}
 	
+	/**
+	 * Check if the piece can be placed at a specific point
+	 * @param piece The piece to check
+	 * @param destination The destination where the piece might be
+	 * @return Return true if the piece can be placed at <c>destination</c>
+	 */
 	public boolean checkIfPieceCanBePlaced(@NotNull Piece piece, @NotNull Point destination) {
 		if (piece == null || destination == null)
 			throw new NullPointerException();
@@ -110,6 +153,12 @@ public class Grid extends AbstractModel implements Observer {
 		
 		return true;
 	}
+	
+	/**
+	 * Check if the piece can be placed where it is
+	 * @param piece The piece to check
+	 * @return Return true if the piece can stay where it is, false otherwise
+	 */
 	public boolean checkIfPieceCanBePlaced(@NotNull Piece piece) {
 		if (piece == null)
 			throw new NullPointerException();
@@ -177,6 +226,14 @@ public class Grid extends AbstractModel implements Observer {
 		
 		return result;
 	}
+	
+	/**
+	 * Move <c>piece</c> at the coordinates <c>destination</c> if it is possible (no overlap, and not out of bound)
+	 * @param piece
+	 * @param x The index <c>x</c> (columns)
+	 * @param y The index <c>y</c> (rows)
+	 * @return
+	 */
 	public boolean move(@NotNull Piece piece, int x, int y) {
 		return move(piece, new Point(x, y));
 	}
@@ -201,6 +258,13 @@ public class Grid extends AbstractModel implements Observer {
 		forceMove(piece, new Point(x, y));
 	}
 	
+	/**
+	 * Rotate the piece regarding the collision.
+	 * @param piece The piece to rotate
+	 * @param degreeClockwise The number of degree (clockwise) to rotate. Accepted value: 0, 90, 180, 270.
+	 * @return Return <c>true</c> if the piece has been rotated, false otherwise (collision with another piece or with
+	 * the bounds of the grid).
+	 */
 	public boolean rotate(@NotNull Piece piece, int degreeClockwise) {
 		if (piece == null)
 			throw new NullPointerException();
@@ -226,6 +290,14 @@ public class Grid extends AbstractModel implements Observer {
 			return false;
 		}
 	}
+	
+	/**
+	 * Rotate the piece regarding the collision.
+	 * @param index The index of the piece to rotate
+	 * @param degreeClockwise The number of degree (clockwise) to rotate. Accepted value: 0, 90, 180, 270.
+	 * @return Return <c>true</c> if the piece has been rotated, false otherwise (collision with another piece or with
+	 * the bounds of the grid).
+	 */
 	public boolean rotate(int index, int degreeClockwise) {
 		if (!(0 <= index && index < getPieces().size()))
 			throw new ArrayIndexOutOfBoundsException();
@@ -233,6 +305,12 @@ public class Grid extends AbstractModel implements Observer {
 		return rotate(getPieces().get(index), degreeClockwise);
 	}
 	
+	/**
+	 * Delete the square at a specific point by changing the shape of a piece (if there is a piece at the specific
+	 * point)
+	 * @param point The point
+	 * @return Return true if one or more piece has been re-shaped, false if nothing happened.
+	 */
 	public boolean deleteAt(@NotNull Point point) {
 		if (point == null)
 			throw new NullPointerException();
@@ -262,10 +340,24 @@ public class Grid extends AbstractModel implements Observer {
 		
 		return hasDeleteAtLeastOneTile;
 	}
+	
+	/**
+	 * Delete the square at a specific point by changing the shape of a piece (if there is a piece at the specific
+	 * point)
+	 * @param x The index <c>x</c> (columns)
+	 * @param y The index <c>y</c> (rows)
+	 * @return Return true if one or more piece has been re-shaped, false if nothing happened.
+	 */
 	public boolean deleteAt(int x, int y) {
 		return deleteAt(new Point(x, y));
 	}
 	
+	/**
+	 * Get all the piece at point. Many pieces can be at the same place because their shape is a bounding rectangle box,
+	 * not only their shape.
+	 * @param point The point
+	 * @return Return a list of pieces where there shape is in <c>point</c>
+	 */
 	@NotNull
 	public ArrayList<Piece> getAll(@NotNull Point point) {
 		if (point == null)
@@ -353,6 +445,12 @@ public class Grid extends AbstractModel implements Observer {
 		return get(new Point(x, y));
 	}
 	
+	/**
+	 * Add a piece in the grid
+	 * @param piece The piece to add
+	 * @return Return <c>true</c> if the piece has been added, <c>false</c> if a collision id detected or if its
+	 * coordinate are out of bounds.
+	 */
 	public boolean add(@NotNull Piece piece) {
 		// Check if the piece and its components are not null
 		if (piece == null)

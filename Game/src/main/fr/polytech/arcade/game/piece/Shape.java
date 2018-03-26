@@ -3,6 +3,13 @@ package main.fr.polytech.arcade.game.piece;
 import fr.berger.enhancedlist.Point;
 import fr.berger.enhancedlist.matrix.Matrix;
 
+/**
+ * Class which describes a shape for a Piece.
+ * @author Valentin Berger
+ * @see Matrix
+ * @see Piece
+ * @see PieceBuilder
+ */
 public class Shape extends Matrix<Boolean> {
 	
 	public Shape() {
@@ -18,6 +25,9 @@ public class Shape extends Matrix<Boolean> {
 		super(x, y, false);
 	}
 	
+	/**
+	 * Trim the matrix according to the biggest x and y '1' values.
+	 */
 	public void trim() {
 		int newX = 0;
 		int newY = 0;

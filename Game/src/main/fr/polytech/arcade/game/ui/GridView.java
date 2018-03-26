@@ -1,32 +1,47 @@
 package main.fr.polytech.arcade.game.ui;
 
-import javafx.event.EventHandler;
-import javafx.scene.Node;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import fr.berger.enhancedlist.Point;
 import main.fr.polytech.arcade.game.grid.Grid;
-import main.fr.polytech.arcade.game.grid.GridModel;
 import main.fr.polytech.arcade.game.piece.Piece;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
-
+/**
+ * The view for Grid and GridController. It inherits from BorderPane (JavaFX element)
+ * @author Valentin Berger
+ * @see Grid
+ * @see main.fr.polytech.arcade.game.grid.GridController
+ */
 public class GridView extends BorderPane {
 	
+	/**
+	 * The background color of the grid. Default is white.
+	 */
 	@NotNull
 	private Color backgroundColor;
+	
+	/**
+	 * The color of the lines between the tiles. Default is gray.
+	 */
 	@NotNull
 	private Color lineColor;
+	
+	
+	/**
+	 * The width of the lines between the tiles. Default is 1.0.
+	 */
 	private double lineStroke;
+	
+	/**
+	 * The size of a tile n*n. Default is 50.
+	 */
 	private int tileDimension;
 	
+	/**
+	 * Default constructor.
+	 */
 	public GridView() {
 		super();
 		setBackgroundColor(Color.WHITE);
@@ -35,6 +50,12 @@ public class GridView extends BorderPane {
 		setLineStroke(1d);
 	}
 	
+	/**
+	 * Update its components according to <c>grid</c>
+	 * @param grid The grid containing all the information to display through this view. Please see GridController for
+	 *             further information.
+	 * @see main.fr.polytech.arcade.game.grid.GridController
+	 */
 	public void update(@NotNull Grid grid) {
 		if (grid == null)
 			throw new NullPointerException();

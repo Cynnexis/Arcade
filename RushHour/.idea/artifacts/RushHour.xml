@@ -1,26 +1,26 @@
 <component name="ArtifactManager">
-  <artifact type="javafx" name="Tetris">
-    <output-path>$PROJECT_DIR$/out/artifacts/Tetris</output-path>
+  <artifact type="javafx" build-on-make="true" name="RushHour">
+    <output-path>$PROJECT_DIR$/out/artifacts/RushHour</output-path>
     <properties id="javafx-properties">
       <options>
-        <option name="appClass" value="fr.polytech.arcade.tetris.Main" />
+        <option name="appClass" value="fr.polytech.arcade.rushhour.Main" />
         <option name="description" value="" />
         <option name="htmlPlaceholderId" value="" />
-        <option name="title" value="Tetris" />
-        <option name="vendor" value="Polytech Corporation" />
-        <option name="version" value="1.0.0.0" />
+        <option name="title" value="Rush Hour" />
+        <option name="vendor" value="" />
+        <option name="version" value="" />
       </options>
     </properties>
     <root id="root">
-      <element id="archive" name="Tetris.jar">
-        <element id="module-output" name="Tetris" />
+      <element id="archive" name="RushHour.jar">
+        <element id="module-output" name="RushHour" />
         <element id="directory" name="META-INF">
           <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
         </element>
       </element>
+      <element id="library" level="project" name="EnhancedList" />
       <element id="library" level="project" name="Game" />
       <element id="library" level="project" name="JetBrains Annotations" />
-      <element id="library" level="project" name="EnhancedList" />
     </root>
   </artifact>
 </component>
