@@ -9,8 +9,8 @@
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
     <jar href="EnhancedList.jar" size="26740" download="eager" />
-    <jar href="Game.jar" size="54080" download="eager" />
-    <jar href="RushHour.jar" size="11762" download="eager" />
+    <jar href="Game.jar" size="54432" download="eager" />
+    <jar href="RushHour.jar" size="12078" download="eager" />
     <jar href="annotations-java8.jar" size="25244" download="eager" />
   </resources>
   <jfx:javafx-desc  width="600" height="400" main-class="fr.polytech.arcade.rushhour.Main"  name="RushHour" />

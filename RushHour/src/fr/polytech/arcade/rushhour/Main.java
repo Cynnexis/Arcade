@@ -36,6 +36,7 @@ public class Main extends Application {
 	private Piece mainPiece;
 	
 	private AnimationTimer aTimer;
+	private long lastUpdate;
 	private GameState state;
 	private int numberOfMove;
 	
@@ -54,6 +55,7 @@ public class Main extends Application {
 		grid.addGridHandler(new GridHandler() {
 			@Override
 			public void onTileClicked(int x, int y, @NotNull MouseButton mouseButton) {
+				System.out.println("Clicked");
 				if (grid != null)
 					grid.getGrid().setFocusedPiece(grid.getGrid().get(x, y));
 			}
@@ -112,14 +114,17 @@ public class Main extends Application {
 		
 		aTimer = new AnimationTimer() {
 			@Override
-			public void handle(long now) {
-				info.setText("Number of Move(s): " + numberOfMove);
-				
-				if (state == GameState.PLAYING && mainPiece.getPosition().getX() >= 4 && mainPiece.getPosition().getY() == 2) {
-					state = GameState.WIN;
-					info.setText(info.getText() + " | You win!");
-					Alert alert = new Alert(Alert.AlertType.INFORMATION, "Congratulation! You win!", ButtonType.OK);
-					alert.show();
+			public void handle(long nowNano) {
+				if (nowNano - lastUpdate >= 100000000) {
+					lastUpdate = nowNano;
+					info.setText("Number of Move(s): " + numberOfMove);
+					
+					if (state == GameState.PLAYING && mainPiece.getPosition().getX() >= 4 && mainPiece.getPosition().getY() == 2) {
+						state = GameState.WIN;
+						info.setText(info.getText() + " | You win!");
+						Alert alert = new Alert(Alert.AlertType.INFORMATION, "Congratulation! You win!", ButtonType.OK);
+						alert.show();
+					}
 				}
 			}
 		};
@@ -139,6 +144,7 @@ public class Main extends Application {
 	
 	private void newGame() {
 		state = GameState.INITIALIZING;
+		lastUpdate = 0;
 		numberOfMove = 0;
 		grid.getGrid().getPieces().clear();
 		
@@ -163,7 +169,14 @@ public class Main extends Application {
 		state = GameState.PLAYING;
 		aTimer.start();
 	}
-
+	
+	@Override
+	public void stop() throws Exception {
+		super.stop();
+		if (aTimer != null)
+			aTimer.stop();
+	}
+	
 	public static void main(String[] args) {
 		launch(args);
 	}

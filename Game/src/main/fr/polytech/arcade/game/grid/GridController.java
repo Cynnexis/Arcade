@@ -55,7 +55,7 @@ public class GridController implements Observer {
 		setView(view);
 		setGridHandlers(new ArrayList<>());
 		
-		getView().addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+		getView().addEventHandler(MouseEvent.MOUSE_RELEASED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
 				getView().requestFocus();
