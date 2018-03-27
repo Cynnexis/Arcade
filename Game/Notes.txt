@@ -1,0 +1,22 @@
+Fonctionnalités :
+* Utilisation du design pattern MVC sur la grille uniquement (Grid, GridController, GridView)
+  => Piece n'a pas ce pattern car il n'a pas besoin d'être controllé et est affiché par une grille (GridView)
+     seul un modèle est nécessaire.
+  => Grid n'est pas en réalité une vrai matrice, elle utilise un niveau d'abstraction différent (liste de pièce)
+* Utilisation d'interface comme EventHandler
+* Utilisation d'un Builder pour Piece (PieceBuilder)
+* Utilisation du design pattern Observable sur Grid (car c'est un modèle) et sur Piece (pour notifié le modèle grille
+  qu'un changement a été effectué (ex: rotation)
+* Utilisation d'une bibliothèque externe (EnhancedList)
+Coté Applications:
+* Utilisation d'AnimationTimer pour les threads
+* Tetris, manque de temps pour la suppression de lignes non-continues et non connecté à la dernière
+
+
+Problèmes :
+* Bug avec le clique de la sourie qui n'est pas forcement detecter
+  => lié à (peut-être) une mauvaise utilisation de JavaFX (BorderPane)
+
+
+Améliorations possibles:
+* Donner plus de flexibilité visuelle à l'utilisateur dans la bibliothèque

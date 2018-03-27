@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -49,17 +50,16 @@ public class Main extends Application {
 		
 		bp_main = new BorderPane();
 		b_play = new Button("Play");
-		b_exit = new Button("Exit");
+		b_exit = new Button("Rush Quit");
 		info = new Text("");
 		
 		grid.addGridHandler(new GridHandler() {
 			@Override
 			public void onTileClicked(int x, int y, @NotNull MouseButton mouseButton) {
-				System.out.println("Clicked");
 				if (grid != null)
 					grid.getGrid().setFocusedPiece(grid.getGrid().get(x, y));
 			}
-		
+			
 			@Override
 			public void onKeyPressed(@NotNull KeyCode keyCode) {
 				if (grid != null && state == GameState.PLAYING) {
@@ -105,6 +105,7 @@ public class Main extends Application {
 			}
 		});
 		
+		b_exit.setTooltip(new Tooltip("I rush quit!\n#LéaChemoul"));
 		b_exit.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
