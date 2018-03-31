@@ -26,8 +26,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
 
-// https://www.youtube.com/watch?v=HI0rlp7tiZ0&t=17s
-
 public class Main extends Application {
 
 	private GridController g_controller;
@@ -70,22 +68,24 @@ public class Main extends Application {
 		g_controller.addGridHandler(new GridHandler() {
 			@Override
 			public void onTileClicked(int x, int y, @NotNull MouseButton mouseButton) {
-				Piece clickedPiece = g_controller.getGrid().get(x, y);
-				Piece focusedPiece = g_controller.getGrid().getFocusedPiece();
-				
-				if (focusedPiece != null) {
-					boolean tryToMovePiece = true;
+				if (state == GameState.PLAYING) {
+					Piece clickedPiece = g_controller.getGrid().get(x, y);
+					Piece focusedPiece = g_controller.getGrid().getFocusedPiece();
 					
-					if (clickedPiece != null && Objects.equals(clickedPiece, focusedPiece)) {
-						g_controller.getGrid().rotate(clickedPiece, 90);
-						tryToMovePiece = false;
-					}
-					
-					if (tryToMovePiece) {
-						if (x < focusedPiece.getPosition().getX())
-							g_controller.getGrid().move(focusedPiece, new Point(focusedPiece.getPosition().getX() - 1, focusedPiece.getPosition().getY()));
-						else if (x > focusedPiece.getPosition().getX())
-							g_controller.getGrid().move(focusedPiece, new Point(focusedPiece.getPosition().getX() + 1, focusedPiece.getPosition().getY()));
+					if (focusedPiece != null) {
+						boolean tryToMovePiece = true;
+						
+						if (clickedPiece != null && Objects.equals(clickedPiece, focusedPiece)) {
+							g_controller.getGrid().rotate(clickedPiece, 90);
+							tryToMovePiece = false;
+						}
+						
+						if (tryToMovePiece) {
+							if (x < focusedPiece.getPosition().getX())
+								g_controller.getGrid().move(focusedPiece, new Point(focusedPiece.getPosition().getX() - 1, focusedPiece.getPosition().getY()));
+							else if (x > focusedPiece.getPosition().getX())
+								g_controller.getGrid().move(focusedPiece, new Point(focusedPiece.getPosition().getX() + 1, focusedPiece.getPosition().getY()));
+						}
 					}
 				}
 			}
